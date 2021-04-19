@@ -22,6 +22,17 @@ namespace Settings {
 	[CreateAssetMenu]
 	public class TileSettings : UpdatableSettings {
 		public Layer[] layers;
+		
+#if UNITY_EDITOR
+
+		protected override void OnValidate() {
+			for (int i = 1; i < layers.Length; i++) {
+				layers[i].minHeight = layers[i - 1].maxHeight;
+				layers[i].maxHeight = Mathf.Max(layers[i].minHeight, layers[i].maxHeight);
+			}
+			base.OnValidate ();
+		}
+#endif
 	}
 
 }

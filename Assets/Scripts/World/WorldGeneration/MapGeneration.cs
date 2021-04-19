@@ -29,9 +29,6 @@ namespace World.WorldGeneration
                     
                 }
             }
-            Debug.Log("Generated");
-            Debug.Log("MinHeight" + heightMap.MinValue);
-            Debug.Log("MaxHeight" + heightMap.MaxValue);
         }
 
         void OnValuesUpdated() {
