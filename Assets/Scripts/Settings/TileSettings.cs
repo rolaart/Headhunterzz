@@ -10,10 +10,13 @@ namespace Settings {
 	public class Layer {
 		/** Convenient field for representing the tile, not used for anything */
 		[OptionalField] public string name;
+
 		/** The Tile Asset */
 		public Tile tile;
+
 		/** The Lower Bound of where it can appear */
 		[Range(0, 1)] public float minHeight;
+
 		/** The Upper Bound of where it can appear */
 		[Range(0, 1)] public float maxHeight;
 	}
@@ -22,15 +25,18 @@ namespace Settings {
 	[CreateAssetMenu]
 	public class TileSettings : UpdatableSettings {
 		public Layer[] layers;
-		
+
 #if UNITY_EDITOR
 
 		protected override void OnValidate() {
+			// not letting the min height of every next layer to be less than the max height of
+			// the previous and it's max to be not less than the min
 			for (int i = 1; i < layers.Length; i++) {
 				layers[i].minHeight = layers[i - 1].maxHeight;
 				layers[i].maxHeight = Mathf.Max(layers[i].minHeight, layers[i].maxHeight);
 			}
-			base.OnValidate ();
+
+			base.OnValidate();
 		}
 #endif
 	}
