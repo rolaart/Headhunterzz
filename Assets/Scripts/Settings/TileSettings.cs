@@ -24,7 +24,17 @@ namespace Settings {
 	/** Functionality to add tiles from the editor */
 	[CreateAssetMenu]
 	public class TileSettings : UpdatableSettings {
+		/** scaling the interval [0, 1] to [0, 10] so we can have O(1) access to the
+		 * layer that should be to the corresponding height
+		 */
+		private const int Scale = 10;
+		private static readonly int[] Intervals = new int[Scale];
+		
 		public Layer[] layers;
+		
+		public Tile GetLayerTile(float height) {
+			return layers[Intervals[Mathf.FloorToInt(height * (Scale - 1))]].tile;
+		}
 
 #if UNITY_EDITOR
 
@@ -36,6 +46,13 @@ namespace Settings {
 				layers[i].maxHeight = Mathf.Max(layers[i].minHeight, layers[i].maxHeight);
 			}
 
+			// Update the interval array for tiles
+			for (int i = 0; i < layers.Length; i++) {
+				for (int j = Mathf.FloorToInt(layers[i].minHeight * Scale); j < Mathf.CeilToInt(layers[i].maxHeight * Scale); j++) {
+					Intervals[j] = i;
+					// Debug.Log(j + ", " + Intervals[j]);
+				}
+			}
 			base.OnValidate();
 		}
 #endif

@@ -17,16 +17,7 @@ namespace World.WorldGeneration
             
             for (int i = 0; i < mapWidth; i++) {
                 for (int j = 0; j < mapHeight; j++) {
-                    // TODO: Refactor this third loop so the complexity isn't O(w*h*k) where k is number of layers
-                    for (int k = 0; k < tileSettings.layers.Length; k++) {
-                        Layer layer = tileSettings.layers[k];
-                        if (layer.minHeight <= heightMap.Values[i, j] && heightMap.Values[i, j] <= layer.maxHeight) {
-                            tilemap.SetTile(new Vector3Int(i, j, 0), layer.tile);
-                            break;
-                        }
-
-                    }
-                    
+                    tilemap.SetTile(new Vector3Int(i, j, 0), tileSettings.GetLayerTile(heightMap.Values[i, j]));
                 }
             }
         }
