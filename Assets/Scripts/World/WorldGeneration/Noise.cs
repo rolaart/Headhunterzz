@@ -66,6 +66,27 @@ namespace World.WorldGeneration {
 
 			return map;
 		}
+
+		/** Generates noise for a single point, based on the noise settings */
+		public static float GenerateNoise(int x, int y, NoiseSettings settings) {
+			float amplitude = 1;
+			float frequency = 1;
+			float noiseHeight = 0;
+			// Octaves can be looked as number of samples for a point
+			for (int i = 0; i < settings.octaves; i++) {
+				float sampleX = x / settings.scale * frequency;
+				float sampleY = y / settings.scale * frequency;
+
+				// changing the range from [-1,1] to [0,1]
+				float perlinValue = (Mathf.PerlinNoise(sampleX, sampleY) + 1) / 2;
+				noiseHeight += perlinValue * amplitude;
+
+				amplitude *= settings.persistence;
+				frequency *= settings.lacunarity;
+			}
+
+			return noiseHeight % 1;
+		}
 	}
 
 }

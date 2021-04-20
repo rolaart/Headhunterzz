@@ -9,6 +9,14 @@ namespace World {
 	 *  a ground tile is and therefore it forms a rectangle around the Island.
 	 */
 	public class Island {
+		public static int MAX_WIDTH = 64;
+		public static int MAX_HEIGHT = 64;
+		public static int MIN_WIDTH = 16;
+		public static int MIN_HEIGHT = 16;
+
+		public static int MIN_PADDING = 4;
+		public static int MAX_PADDING = 16;
+		
 		private Vector2 min;
 		private Vector2 max;
 	}
