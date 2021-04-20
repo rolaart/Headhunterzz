@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b1d728a2c7477bbc55907560731023, type: 3}
   m_Name: HeightMapSettings
   m_EditorClassIdentifier: 
-  NoiseSettings:
-    normalizeMode: 0
+  autoUpdate: 1
+  noiseSettings:
     scale: 50
     octaves: 4
     persistence: 0.4
@@ -26,21 +26,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 9.607825
-      outSlope: 9.607825
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.040579986
-      value: 0.3898854
-      inSlope: 9.607825
-      outSlope: 9.607825
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
-    m_PreInfinity: 0
-    m_PostInfinity: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
