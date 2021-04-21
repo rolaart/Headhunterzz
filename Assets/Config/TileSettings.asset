@@ -22,3 +22,7 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 5fb50c3fd1b90c04eb506d4ad18bcd9a, type: 2}
     minHeight: 0.4
     maxHeight: 1
+  - name: Border
+    tile: {fileID: 11400000, guid: 7e43d4cc23c18d74bba107801ce76d84, type: 2}
+    minHeight: 1
+    maxHeight: 1
