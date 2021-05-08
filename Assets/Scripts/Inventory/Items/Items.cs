@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory{
+public class Inventory : MonoBehaviour {
 
-    //Has item in slot
-    public bool[] isFull;
 
-    //Slots
+    public int[] items;
     public GameObject[] slots;
 }
-
