@@ -8,7 +8,7 @@ namespace World.WorldGeneration {
 		/** Generates Perlin Noise based on the settings specified through the Editor.
 		 *  
 		 */
-		public static float[,] GenerateMap(int width, int height, NoiseSettings settings) {
+		public static float[,] GenerateMap(int startX, int startY, int width, int height, NoiseSettings settings) {
 			float[,] map = new float[width, height];
 			
 			// Using the seed for replicating maps
@@ -38,8 +38,8 @@ namespace World.WorldGeneration {
 
 					// Octaves can be looked as number of samples for a point
 					for (int i = 0; i < settings.octaves; i++) {
-						float sampleX = (x - halfWidth + octaveOffsets[i].x) / settings.scale * frequency;
-						float sampleY = (y - halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
+						float sampleX = (startX + x - halfWidth + octaveOffsets[i].x) / settings.scale * frequency;
+						float sampleY = (startY + y - halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
 
 						// changing the range from [-1,1] to [0,1]
 						float perlinValue = (Mathf.PerlinNoise(sampleX, sampleY) + 1) / 2;
@@ -73,7 +73,7 @@ namespace World.WorldGeneration {
 			float frequency = 1;
 			float noiseHeight = 0;
 			// Octaves can be looked as number of samples for a point
-			for (int i = 0; i < settings.octaves; i++) {
+			for (int i = 0; i < 1; i++) {
 				float sampleX = x / settings.scale * frequency;
 				float sampleY = y / settings.scale * frequency;
 

@@ -17,6 +17,7 @@ namespace Characters {
 			_animator = GetComponent<Animator>();
 			_stats = new Stats();
 		}
+		
 	}
 
 }
