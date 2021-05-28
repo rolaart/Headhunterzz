@@ -5,8 +5,8 @@ namespace World.WorldGeneration
 {
     public static class HeightMapGeneration
     {
-        public static HeightMap Generate(int width, int height, HeightMapSettings settings) {
-            float[,] values = Noise.GenerateMap(width, height, settings.noiseSettings);
+        public static HeightMap Generate(int startX, int startY, int width, int height, HeightMapSettings settings) {
+            float[,] values = Noise.GenerateMap(startX, startY, width, height, settings.noiseSettings);
 
             AnimationCurve heightCurve = new AnimationCurve(settings.heightCurve.keys);
             
