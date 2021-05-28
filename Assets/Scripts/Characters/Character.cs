@@ -7,7 +7,7 @@ namespace Characters {
 		typeof(BoxCollider2D),
 		typeof(Animator))]
 	public class Character : MonoBehaviour {
-		public const float DefaultMoveSpeed = 5.0f;
+		public const float DefaultMoveSpeed = 1.0f;
 		public const float DefaultAttackSpeed = 2.0f;
 		
 		private Animator _animator;
