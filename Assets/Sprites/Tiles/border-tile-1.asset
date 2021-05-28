@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: isometric_pixel_0003
+  m_Name: border-tile-1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 9ade10f090f61e84091a6595d1526fc4, type: 3}
+  m_Sprite: {fileID: 2336945846720936156, guid: 0881785a5f53acf4aaea3175ae59974c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -15,14 +15,14 @@ MonoBehaviour:
   autoUpdate: 1
   layers:
   - name: Water
-    tile: {fileID: 11400000, guid: 6e4f41b01b3f1384eafdf4748bd5b6be, type: 2}
+    tile: {fileID: 11400000, guid: 09aeeb573efba6944baadde61b1c3ead, type: 2}
     minHeight: 0
     maxHeight: 0.4
   - name: Ground
-    tile: {fileID: 11400000, guid: 5fb50c3fd1b90c04eb506d4ad18bcd9a, type: 2}
+    tile: {fileID: 11400000, guid: 04b9bedc639e47041acd705794e06814, type: 2}
     minHeight: 0.4
     maxHeight: 1
   - name: Border
-    tile: {fileID: 11400000, guid: 7e43d4cc23c18d74bba107801ce76d84, type: 2}
+    tile: {fileID: 11400000, guid: 4ffec5ce59d113348adf0b5cf29ad807, type: 2}
     minHeight: 1
     maxHeight: 1
