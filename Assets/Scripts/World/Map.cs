@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Settings;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using World.WorldGeneration;
 
@@ -14,6 +15,7 @@ namespace World {
 		private const int ExplorationDistance = 2;
 		
 		public Tilemap tilemap;
+		public IslandChunk SelectedIslandChunk;
 		public HeightMapSettings heightMapSettings;
 		public TileSettings tileSettings;
 		
@@ -24,12 +26,15 @@ namespace World {
 		public void Start() {
 			_mapGeneration = new MapGeneration(tilemap, heightMapSettings, tileSettings);
 			_cameraTransform = camera.GetComponent<Transform>();
+			
+			gameObject.DontDestroyOnLoad();
 		}
 
 		public void Update() {
 			ExploreNewCoordinates();
 			if (Input.GetMouseButtonDown(0)) {
 				Vector3Int mousePos = tilemap.WorldToCell(camera.ScreenToWorldPoint(Input.mousePosition));
+				
 				Debug.Log(mousePos);
 				if (IsIslandMouseHit(mousePos)) {
 					// tilemap.SetTile(mousePos, tileSettings.layers[2].tile);
@@ -40,13 +45,18 @@ namespace World {
 					islandChunkPos.y %= MapChunk.RowSize;
 
 					MapChunk mapChunk = GetMapChunk(mapChunkPos);
-					IslandChunk islandChunk = mapChunk.GetIsland(islandChunkPos);
-					Debug.Log("Island is " + islandChunk.name);
+					SelectedIslandChunk = mapChunk.GetIsland(islandChunkPos);
+					Debug.Log("Island is " + SelectedIslandChunk.Name);
+					TeleportToIsland();
 				}
 				else {
 					Debug.Log("Island is missed");
 				}
 			}
+		}
+
+		public void OnDestroy() {
+			DontDestroyOnLoadManager.DestroyAll();
 		}
 
 		private void ExploreNewCoordinates() {
@@ -62,10 +72,14 @@ namespace World {
 		MapChunk GetMapChunk(Vector3Int pos) {
 			if (!Chunks.ContainsKey(pos)) {
 				_mapGeneration.GenerateMapChunk(pos);
-				Chunks.Add(pos, new MapChunk());
+				Chunks.Add(pos, new MapChunk(pos));
 			}
 
 			return Chunks[pos];
+		}
+
+		private void TeleportToIsland() {
+			SceneManager.LoadScene("IslandScene");
 		}
 
 		public bool IsIslandMouseHit(Vector3Int mousePos) {

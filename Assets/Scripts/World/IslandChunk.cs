@@ -10,11 +10,13 @@ namespace World {
 	 */
 	
 	public class IslandChunk {
-		public static int IslandChunkSize = 64;
-		public string name = "England";
+		public const int IslandChunkSize = 64;
+		public readonly Vector3Int Position;
+		public readonly string Name;
 
-		public IslandChunk(string name) {
-			this.name = name;
+		public IslandChunk(Vector3Int position, string name) {
+			Position = position;
+			Name = name;
 		}
 	}
 

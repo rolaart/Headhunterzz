@@ -7,20 +7,27 @@ namespace World {
 	/// where a given island can generate
 	/// </summary>
 	public class MapChunk {
-		public static int MapChunkSize = 256;
-		public static int RowSize = MapChunkSize / IslandChunk.IslandChunkSize;
+		public const int MapChunkSize = 256;
+		public const int RowSize = MapChunkSize / IslandChunk.IslandChunkSize;
+		public Vector3Int Position;
 
-		public IslandChunk[,] Chunks = new IslandChunk[RowSize, RowSize];
+		private readonly IslandChunk[][] _chunks = new IslandChunk[RowSize][];
 
-		public MapChunk() {
+		public MapChunk(Vector3Int position) {
+			Position = position * MapChunkSize;
+			
 			for (int i = 0; i < RowSize; i++) {
+				_chunks[i] = new IslandChunk[RowSize];
 				for (int j = 0; j < RowSize; j++) {
-					Chunks[i, j] = new IslandChunk(IslandNamesDB.GetRandomName());
+					Vector3Int offset = new Vector3Int(i * IslandChunk.IslandChunkSize, j * IslandChunk.IslandChunkSize,
+						0);
+					Vector3Int islandPos = Position + offset;
+					_chunks[i][j] = new IslandChunk(islandPos, IslandNamesDB.GetRandomName());
 				}
 			}
 		}
 		public IslandChunk GetIsland(Vector3Int pos) {
-			return Chunks[pos.x, pos.y];
+			return _chunks[pos.x][pos.y];
 		}
 	}
 
