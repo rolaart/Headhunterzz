@@ -12,14 +12,9 @@ namespace Cameras {
 		private int _screenWidth;
 		private int _screenHeight;
 		
-		public float dampTime = 0.15f;
-		private Vector3 velocity = Vector3.zero;
-		private Transform target;
-		private Camera _camera;
-
+		private Vector3 _target;
 		private void Start() {
-			_camera = gameObject.GetComponent<Camera>();
-			target = gameObject.GetComponent<Transform>();
+			_target = new Vector3();
 			
 			_screenWidth = Screen.width;
 			_screenHeight = Screen.height;
@@ -29,34 +24,26 @@ namespace Cameras {
 		// Update is called once per frame
 		void Update() {
 			HandleMouseMovement();
-			if (target) {
-				Vector3 point = _camera.WorldToViewportPoint(target.position);
-				Vector3 delta = target.position - _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
-				Vector3 destination = transform.position + delta;
-				transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
-			}
+	
+			Vector3 targetPos = new Vector3(_target.x, _target.y, transform.position.z);
+			Vector3 velocity = (targetPos - transform.position);
+			transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, 1.0f, Time.deltaTime);
+			
 		}
 
 		private void HandleMouseMovement() {
 			if (Input.mousePosition.x > _screenWidth - Boundary) {
-				float translateX = Speed * Time.smoothDeltaTime;
-				
-				target.transform.Translate(translateX, 0, 0);
+				_target.x += Speed * Time.smoothDeltaTime;
 			}
-
-			if (Input.mousePosition.x < 0 + Boundary) {
-				float translateX = -Speed * Time.smoothDeltaTime;
-				target.transform.Translate(translateX, 0, 0);
+			else if (Input.mousePosition.x < 0 + Boundary) {
+				_target.x -= Speed * Time.smoothDeltaTime;
 			}
 
 			if (Input.mousePosition.y > _screenHeight - Boundary) {
-				float translateY = Speed * Time.smoothDeltaTime;
-				target.transform.Translate(0, translateY, 0);
+				_target.y += Speed * Time.smoothDeltaTime;
 			}
-
-			if (Input.mousePosition.y < 0 + Boundary) {
-				float translateY = -Speed * Time.smoothDeltaTime;
-				target.transform.Translate(0, translateY, 0);
+			else if (Input.mousePosition.y < 0 + Boundary) {
+				_target.y -= Speed * Time.smoothDeltaTime;
 			}
 		}
 	}

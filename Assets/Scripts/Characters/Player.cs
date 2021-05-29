@@ -26,6 +26,7 @@ namespace Characters {
 			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			Vector2 movement = inputVector * DefaultMoveSpeed;
 			Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
+			SetDirection(movement);
 			_rigidBody.MovePosition(newPos);
 		}
 
