@@ -44,7 +44,7 @@ namespace World {
 				for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
 					Vector3Int pos = new Vector3Int(i, j, 0);
 					TileBase tile = tilemap.GetTile(pos);
-					if (tile.Equals(map.tileSettings.layers[1].tile)) {
+					if (tile.Equals(map.tileSettings.groundLayer.tile)) {
 						spawnPos = pos;
 						return;
 					}

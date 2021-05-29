@@ -16,15 +16,17 @@ namespace World {
 		
 		public Tilemap tilemap;
 		public IslandChunk SelectedIslandChunk;
+		
 		public HeightMapSettings heightMapSettings;
 		public TileSettings tileSettings;
+		public BiomeSettings biomeSettings;
 		
 		private MapGeneration _mapGeneration;
 		public Dictionary<Vector3Int, MapChunk> Chunks = new Dictionary<Vector3Int, MapChunk>();
 
 
 		public void Start() {
-			_mapGeneration = new MapGeneration(tilemap, heightMapSettings, tileSettings);
+			_mapGeneration = new MapGeneration(tilemap, heightMapSettings, tileSettings, biomeSettings);
 			_cameraTransform = camera.GetComponent<Transform>();
 			
 			gameObject.DontDestroyOnLoad();
@@ -83,7 +85,7 @@ namespace World {
 		}
 
 		public bool IsIslandMouseHit(Vector3Int mousePos) {
-			return tilemap.GetTile(mousePos) == tileSettings.layers[1].tile;
+			return tilemap.GetTile(mousePos) == tileSettings.groundLayer.tile;
 		}
 	}
 
