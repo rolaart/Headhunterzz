@@ -9,12 +9,14 @@ using Random = UnityEngine.Random;
 namespace World.WorldGeneration {
 	public class MapGeneration {
 		private readonly Tilemap tilemap;
+		private readonly Tilemap waterTilemap;
 		private readonly HeightMapSettings heightMapSettings;
 		private readonly TileSettings tileSettings;
 		private readonly BiomeSettings biomeSettings;
 		
-		public MapGeneration(Tilemap tilemap, HeightMapSettings heightMapSettings, TileSettings tileSettings, BiomeSettings biomeSettings) {
+		public MapGeneration(Tilemap tilemap, Tilemap waterTilemap, HeightMapSettings heightMapSettings, TileSettings tileSettings, BiomeSettings biomeSettings) {
 			this.tilemap = tilemap;
+			this.waterTilemap = waterTilemap;
 			this.heightMapSettings = heightMapSettings;
 			this.tileSettings = tileSettings;
 			this.biomeSettings = biomeSettings;
@@ -60,8 +62,8 @@ namespace World.WorldGeneration {
 				for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
 					Vector3Int pos = new Vector3Int(i + chunkX, j + chunkY, 0);
 					Vector3Int pos2 = new Vector3Int(j + chunkX, i + chunkY , 0);
-					tilemap.SetTile(pos, tileSettings.waterLayer.tile);
-					tilemap.SetTile(pos2, tileSettings.waterLayer.tile);
+					waterTilemap.SetTile(pos, tileSettings.waterLayer.tile);
+					waterTilemap.SetTile(pos2, tileSettings.waterLayer.tile);
 				}
 			}
 			
@@ -69,8 +71,8 @@ namespace World.WorldGeneration {
 				for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
 					Vector3Int pos = new Vector3Int(i + chunkX, j + chunkY, 0);
 					Vector3Int pos2 = new Vector3Int(j + chunkX, i + chunkY , 0);
-					tilemap.SetTile(pos, tileSettings.waterLayer.tile);
-					tilemap.SetTile(pos2, tileSettings.waterLayer.tile);
+					waterTilemap.SetTile(pos, tileSettings.waterLayer.tile);
+					waterTilemap.SetTile(pos2, tileSettings.waterLayer.tile);
 				}
 			}
 			
@@ -80,7 +82,20 @@ namespace World.WorldGeneration {
 
 					float height = CalculateAdjustedHeight(centroid, pos, heightMap.Values[x, y]);
 					height = Mathf.Clamp01(height);
-					tilemap.SetTile(pos, tileSettings.GetLayerTile(biome, height));
+					if (height <= tileSettings.waterLayer.maxHeight) {
+						waterTilemap.SetTile(pos, tileSettings.waterLayer.tile);
+						continue;
+					}
+					
+					if (height <= tileSettings.groundLayer.maxHeight) {
+						tilemap.SetTile(pos, biome.baseTile);
+						continue;
+					}
+
+					if (height <= tileSettings.borderLayer.maxHeight) {
+						tilemap.SetTile(pos, tileSettings.borderLayer.tile);
+						continue;
+					}
 				}
 			}
 		}
@@ -93,7 +108,6 @@ namespace World.WorldGeneration {
 					Vector3Int center = GenerateRandomCenter(realIslandX, realIslandY);
 					
 					GenerateIslandChunk(center, realIslandX, realIslandY);
-					GenerateIslandChunkBorders(realIslandX, realIslandY);
 				}
 			}
 		}

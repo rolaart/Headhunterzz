@@ -6,7 +6,7 @@ namespace Cameras {
 
 	[RequireComponent(typeof(Camera))]
 	public class SmoothCamera2D : MonoBehaviour {
-		private const int Boundary = 50;
+		private const int Boundary = 20;
 		public const int Speed = 50;
 
 		private int _screenWidth;

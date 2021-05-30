@@ -9,7 +9,7 @@ namespace World.WorldGeneration {
 			float temperature = Noise.GenerateNoise(x, y, biomeSettings.temperatureNoiseSettings);
 			float humidity = Noise.GenerateNoise(x, y, biomeSettings.humidityNoiseSettings);
 			
-			Debug.Log("Humidity: " + humidity + " Temperature: " + temperature);
+			//Debug.Log("Humidity: " + humidity + " Temperature: " + temperature);
 			Biome biome = biomeSettings.biomes.FirstOrDefault(b => temperature <= b.maxTemperature && humidity <= b.maxHumidity);
 
 			return biome ?? biomeSettings.biomes[2];

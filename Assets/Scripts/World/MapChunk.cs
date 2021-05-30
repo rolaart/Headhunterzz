@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace World {
 	/// <summary>
@@ -26,8 +28,12 @@ namespace World {
 				}
 			}
 		}
-		public IslandChunk GetIsland(Vector3Int pos) {
-			return _chunks[pos.x][pos.y];
+
+		public IslandChunk GetIsland(Vector3Int mousePos) {
+			Vector3Int islandIdx = mousePos;
+			islandIdx.x = Math.Abs(islandIdx.x) % RowSize;
+			islandIdx.y = Math.Abs(islandIdx.y) % RowSize;
+			return _chunks[islandIdx.x][islandIdx.y];
 		}
 	}
 

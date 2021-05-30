@@ -12,4 +12,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b957e20a64de1ba4ba7999f5fa339972, type: 3}
   m_Name: BiomeSettings
   m_EditorClassIdentifier: 
-  autoUpdate: 0
+  autoUpdate: 1
+  temperatureNoiseSettings:
+    scale: 10
+    octaves: 6
+    persistence: 0.1
+    lacunarity: 1
+    seed: 0
+    offset: {x: 0, y: 0}
+  humidityNoiseSettings:
+    scale: 10
+    octaves: 6
+    persistence: 0.1
+    lacunarity: 21.6
+    seed: 0
+    offset: {x: 0, y: 0}
+  biomes:
+  - name: Snowy Tundra
+    maxTemperature: 0.25
+    maxHumidity: 0.25
+    baseTile: {fileID: 11400000, guid: 5a8d45615fe88a24e8133343f0c359d6, type: 2}
+    tiles:
+    - {fileID: 11400000, guid: 28bfbb041c27c614a8a25a3804494ae9, type: 2}
+    - {fileID: 11400000, guid: 6f2afe65568739b4a91e6a62b495e4bc, type: 2}
+    - {fileID: 11400000, guid: a6d4b7608243565498f853d1f3eb281e, type: 2}
+    - {fileID: 11400000, guid: 5454515544b3b2b449f3ed7e1b035ac5, type: 2}
+    - {fileID: 11400000, guid: 3c38dec03393d794bb40b1de6501348f, type: 2}
+    - {fileID: 11400000, guid: a5901fcb290ce2f43bcf2f6647f442e4, type: 2}
+    - {fileID: 11400000, guid: 9ede2f3b6cbee394da03f5bff5c5a60a, type: 2}
+  - name: Graveyard
+    maxTemperature: 0.25
+    maxHumidity: 0.22
+    baseTile: {fileID: 11400000, guid: 5d65c494fb84c1c44bd199a528a40812, type: 2}
+    tiles:
+    - {fileID: 11400000, guid: fba7c12db387b57468c2283d7975a1f6, type: 2}
+    - {fileID: 11400000, guid: 386cbb3ed97729742b91036aa600c748, type: 2}
+    - {fileID: 11400000, guid: 75228277784f3e84ea15a31e84934069, type: 2}
+    - {fileID: 11400000, guid: 4009e65be190cc346a5939529d416f04, type: 2}
+    - {fileID: 11400000, guid: e89a3c23941d1384a8f276492dd043d6, type: 2}
+    - {fileID: 11400000, guid: b948526ca7c586747807ae720e8d8b45, type: 2}
+    - {fileID: 11400000, guid: 3c6dd07430a3be544817fff462d17b7a, type: 2}
+    - {fileID: 11400000, guid: 10924b23d1a66be45996ee16348543c2, type: 2}
+  - name: Plains
+    maxTemperature: 0.5
+    maxHumidity: 0.5
+    baseTile: {fileID: 11400000, guid: a2e6725d476f96947af0ea2fb50f4c6b, type: 2}
+    tiles:
+    - {fileID: 11400000, guid: 04b9bedc639e47041acd705794e06814, type: 2}
+    - {fileID: 11400000, guid: c6bddc330529c3f4d9c20a93f6c01ec4, type: 2}
+    - {fileID: 11400000, guid: 8d6161a3b62e5274c828bbf14f4acde9, type: 2}
+    - {fileID: 11400000, guid: 10f10cbc2449a8b45bcdb22fbdba5eb3, type: 2}
+    - {fileID: 11400000, guid: 17f3435819f8580479a2c5654ffecb2a, type: 2}
+    - {fileID: 11400000, guid: af37f5e608f24a84e8fc43f01adc47e8, type: 2}
+    - {fileID: 11400000, guid: d82c4bfc97fd7e6408d4511a5fcc7ccd, type: 2}
+    - {fileID: 11400000, guid: 7279e3dd9a6ee39478589a52903f4c99, type: 2}
+    - {fileID: 11400000, guid: 8a0690cd2929f1c4d84cfef38b28c37d, type: 2}
+  - name: Desert
+    maxTemperature: 1
+    maxHumidity: 0.028
+    baseTile: {fileID: 11400000, guid: a769e715e671a5b42a921dc908c70388, type: 2}
+    tiles:
+    - {fileID: 11400000, guid: 4ffec5ce59d113348adf0b5cf29ad807, type: 2}
+    - {fileID: 11400000, guid: f9ae38a7cefa4074ab70a89b12766fea, type: 2}
+    - {fileID: 11400000, guid: 4880f0e1dd812df4089e6c4b427ad4f7, type: 2}
+    - {fileID: 11400000, guid: 80890a862fb1a794c89bf00fa13046b2, type: 2}
+    - {fileID: 11400000, guid: d67be01b72c558e449b4884b629a51bb, type: 2}
+    - {fileID: 11400000, guid: 8249be0e454168a4c844aec4781984f6, type: 2}
+    - {fileID: 11400000, guid: 9fff036a61339024fb0835adda7546f6, type: 2}
+    - {fileID: 11400000, guid: f3a1ac5d471eb2949ba153ee8b44c1b2, type: 2}
+    - {fileID: 11400000, guid: b53cb4be1148a51478721c830621814e, type: 2}
