@@ -11,8 +11,12 @@ namespace World {
 	
 	public class IslandChunk {
 		public const int IslandChunkSize = 64;
+		// aligned to chunk coordinates
 		public readonly Vector3Int Position;
 		public readonly string Name;
+		// actual bounds
+		public Vector3Int Min;
+		public Vector3Int Max;
 
 		public IslandChunk(Vector3Int position, string name) {
 			Position = position;

@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
+using World.WorldGeneration;
 
 namespace Settings {
 
 	/** Representing a level of tiles that can appear on based height */
 	[Serializable]
 	public class Layer {
-		/** Convenient field for representing the tile, not used for anything */
-		[OptionalField] public string name;
-
 		/** The Tile Asset */
 		public Tile tile;
-
-		/** The Lower Bound of where it can appear */
-		[Range(0, 1)] public float minHeight;
 
 		/** The Upper Bound of where it can appear */
 		[Range(0, 1)] public float maxHeight;
@@ -24,16 +20,27 @@ namespace Settings {
 	/** Functionality to add tiles from the editor */
 	[CreateAssetMenu]
 	public class TileSettings : UpdatableSettings {
-		/** scaling the interval [0, 1] to [0, 10] so we can have O(1) access to the
-		 * layer that should be to the corresponding height
-		 */
-		private const int Scale = 10;
-		private static readonly int[] Intervals = new int[Scale];
-		
-		public Layer[] layers;
-		
-		public Tile GetLayerTile(float height) {
-			return layers[Intervals[Mathf.FloorToInt(height * (Scale - 1))]].tile;
+		public Layer waterLayer;
+		public Layer groundLayer;
+		public Layer borderLayer;
+
+		public Tile GetLayerTile(Biome biome, float height) {
+			Assert.IsTrue(height >= 0 && height <= 1, "Invalid height: " + height);
+			if (height <= waterLayer.maxHeight) {
+				return waterLayer.tile;
+			}
+
+			if (height <= groundLayer.maxHeight) {
+				return biome.baseTile;
+			}
+
+			if (height <= borderLayer.maxHeight) {
+				return borderLayer.tile;
+			}
+			
+			// we shouldn't get here
+			Assert.IsTrue(2 < 1, "Height is: " + height);
+			return null;
 		}
 
 #if UNITY_EDITOR
@@ -41,18 +48,8 @@ namespace Settings {
 		protected override void OnValidate() {
 			// not letting the min height of every next layer to be less than the max height of
 			// the previous and it's max to be not less than the min
-			for (int i = 1; i < layers.Length; i++) {
-				layers[i].minHeight = layers[i - 1].maxHeight;
-				layers[i].maxHeight = Mathf.Max(layers[i].minHeight, layers[i].maxHeight);
-			}
-
-			// Update the interval array for tiles
-			for (int i = 0; i < layers.Length; i++) {
-				for (int j = Mathf.FloorToInt(layers[i].minHeight * Scale); j < Mathf.CeilToInt(layers[i].maxHeight * Scale); j++) {
-					Intervals[j] = i;
-					// Debug.Log(j + ", " + Intervals[j]);
-				}
-			}
+			groundLayer.maxHeight = Mathf.Max(waterLayer.maxHeight, groundLayer.maxHeight);
+			borderLayer.maxHeight = Mathf.Max(groundLayer.maxHeight, borderLayer.maxHeight);
 			base.OnValidate();
 		}
 #endif
