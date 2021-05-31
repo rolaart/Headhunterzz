@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using Settings;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -30,6 +32,7 @@ namespace World {
 #endif
 	}
 
+	[ExecuteInEditMode]
 	public class Map : MonoBehaviour {
 		[FormerlySerializedAs("camera")] public Camera mainCamera;
 		private Transform _cameraTransform;
@@ -42,44 +45,63 @@ namespace World {
 		public HeightMapSettings heightMapSettings;
 		public TileSettings tileSettings;
 		public BiomeSettings biomeSettings;
-
-		private MapGeneration _mapGeneration;
+		
+		[SerializeField]
+		public MapGeneration _mapGeneration;
 		public Dictionary<Vector3Int, MapChunk> Chunks = new Dictionary<Vector3Int, MapChunk>();
 
 		public MapGUI mapGui;
+		public GameObject selectedIslandHoverEffect;
 
 		public TextMeshProUGUI mousePosDebug;
 
-
+		
 		public void Start() {
-			_mapGeneration = new MapGeneration(tilemap, waterTilemap, heightMapSettings, tileSettings, biomeSettings);
+			
 			_cameraTransform = mainCamera.GetComponent<Transform>();
-
-			gameObject.DontDestroyOnLoad();
+			if (Application.isPlaying) {
+				tilemap.ClearAllTiles();
+				_mapGeneration =
+					new MapGeneration(tilemap, waterTilemap, heightMapSettings, tileSettings, biomeSettings);
+				gameObject.DontDestroyOnLoad();
+			}
 		}
 
 		public void Update() {
-			ExploreNewCoordinates();
-			Vector3Int mousePos = tilemap.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition));
-			mousePosDebug.text = ((Vector2Int) (mousePos)).ToString();
-			if (Input.GetMouseButtonDown(0)) {
-				if (IsIslandMouseHit(mousePos)) {
-					Vector3Int mapChunkPos = Vector3Int.FloorToInt((Vector3) mousePos / (float) MapChunk.MapChunkSize);
+			if (Application.isPlaying) {
+				ExploreNewCoordinates();
+				Vector3Int mousePos = tilemap.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+				mousePosDebug.text = ((Vector2Int) (mousePos)).ToString();
+				if (Input.GetMouseButtonDown(0)) {
+					if (IsIslandMouseHit(mousePos)) {
+						Vector3Int mapChunkPos =
+							Vector3Int.FloorToInt((Vector3) mousePos / (float) MapChunk.MapChunkSize);
 
-					MapChunk mapChunk = Chunks[mapChunkPos];
-					SelectedIslandChunk = mapChunk.GetIsland(mousePos);
+						MapChunk mapChunk = Chunks[mapChunkPos];
+						SelectedIslandChunk = mapChunk.GetIsland(mousePos);
 #if DEBUG
-					mapGui.mapChunk.text = ((Vector2Int) (mapChunkPos)).ToString();
+						mapGui.mapChunk.text = ((Vector2Int) (mapChunkPos)).ToString();
 #endif
-					UpdateIslandBoundsIfNeeded(SelectedIslandChunk);
-					UpdateGUI();
-				}
-				else {
-					mapGui.panel.SetActive(false);
+						UpdateIslandHover();
+						UpdateIslandBoundsIfNeeded();
+						UpdateGUI();
+					}
+					else {
+						if (!EventSystem.current.IsPointerOverGameObject()) {
+							selectedIslandHoverEffect.SetActive(false);
+							mapGui.panel.SetActive(false);
+						}
+					}
 				}
 			}
 		}
 
+		private void UpdateIslandHover() {
+			selectedIslandHoverEffect.SetActive(true);
+			selectedIslandHoverEffect.transform.position =
+				tilemap.CellToWorld(SelectedIslandChunk.Position + new Vector3Int(IslandChunk.IslandChunkSize / 2, IslandChunk.IslandChunkSize / 2, 0));
+
+		}
 		public void OnDestroy() {
 			DontDestroyOnLoadManager.DestroyAll();
 		}
@@ -110,20 +132,20 @@ namespace World {
 		}
 
 		public bool IsIslandMouseHit(Vector3Int mousePos) {
-			return tilemap.GetTile(mousePos) != tileSettings.waterLayer.tile;
+			return tilemap.HasTile(mousePos);
 		}
 
-		public void UpdateIslandBoundsIfNeeded(IslandChunk islandChunk) {
+		public void UpdateIslandBoundsIfNeeded() {
 			Vector3Int min = new Vector3Int(Int32.MaxValue, Int32.MaxValue, 0);
 			Vector3Int max = new Vector3Int(Int32.MinValue, Int32.MinValue, 0);
 
-			Vector3Int islandPos = islandChunk.Position;
+			Vector3Int islandPos = SelectedIslandChunk.Position;
 
-			if (islandChunk.Min == Vector3Int.zero && islandChunk.Max == Vector3Int.zero) {
+			if (SelectedIslandChunk.Min == Vector3Int.zero && SelectedIslandChunk.Max == Vector3Int.zero) {
 				for (int i = 0; i < IslandChunk.IslandChunkSize; i++) {
 					for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
 						Vector3Int next = new Vector3Int(i, j, 0) + islandPos;
-						if (tilemap.GetTile(next) != tileSettings.waterLayer.tile) {
+						if (tilemap.HasTile(next)) {
 							min.x = Math.Min(min.x, next.x);
 							min.y = Math.Min(min.y, next.y);
 							max.x = Math.Max(max.x, next.x);
@@ -132,8 +154,8 @@ namespace World {
 					}
 				}
 
-				islandChunk.Min = min;
-				islandChunk.Max = max;
+				SelectedIslandChunk.Min = min;
+				SelectedIslandChunk.Max = max;
 			}
 		}
 
@@ -146,6 +168,33 @@ namespace World {
 			mapGui.islandChunk.text = ((Vector2Int) (SelectedIslandChunk.Position)).ToString();
 #endif
 		}
+		
+#if UNITY_EDITOR
+		public void Generate() {
+			waterTilemap.ClearAllTiles();
+			tilemap.ClearAllTiles();
+			_mapGeneration = new MapGeneration(tilemap, waterTilemap, heightMapSettings, tileSettings, biomeSettings);
+			_mapGeneration.GenerateMapChunk(new Vector3Int(0, 0, 0));
+		}
+
+		void OnValuesUpdated() {
+			if (!Application.isPlaying) {
+				Generate();
+			}
+		}
+
+		void OnValidate() {
+			if (tileSettings != null) {
+				tileSettings.OnValuesUpdated -= OnValuesUpdated;
+				tileSettings.OnValuesUpdated += OnValuesUpdated;
+			}
+
+			if (heightMapSettings != null) {
+				heightMapSettings.OnValuesUpdated -= OnValuesUpdated;
+				heightMapSettings.OnValuesUpdated += OnValuesUpdated;
+			}
+		}
+#endif
 	}
 
 }
