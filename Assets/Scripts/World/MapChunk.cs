@@ -17,9 +17,7 @@ namespace World {
 
 		public MapChunk(Vector3Int position) {
 			Position = position * MapChunkSize;
-			if (position.y < 0 || position.x < 0) {
-				int absdca = 3;
-			}
+
 			for (int i = 0; i < RowSize; i++) {
 				_chunks[i] = new IslandChunk[RowSize];
 				for (int j = 0; j < RowSize; j++) {
@@ -31,7 +29,7 @@ namespace World {
 			}
 		}
 
-		public IslandChunk GetIsland(Vector3Int mousePos) {
+		public IslandChunk GetIslandFromMouse(Vector3Int mousePos) {
 			Vector3Int islandIdx = mousePos;
 			islandIdx.x = Mathf.FloorToInt((float) islandIdx.x / IslandChunk.IslandChunkSize) % RowSize;
 			islandIdx.y = Mathf.FloorToInt((float) islandIdx.y / IslandChunk.IslandChunkSize) % RowSize;
@@ -42,6 +40,10 @@ namespace World {
 				islandIdx.y = RowSize + islandIdx.y;
 			}
 			return _chunks[islandIdx.x][islandIdx.y];
+		}
+
+		public IslandChunk GetIslandFromIndex(Vector3Int idx) {
+			return _chunks[idx.x][idx.y];
 		}
 	}
 

@@ -27,10 +27,10 @@ namespace World.WorldGeneration {
 			this.biomeSettings = biomeSettings;
 		}
 
-		Vector3Int GenerateRandomCenter(int x, int y) {
+		Vector3Int GenerateRandomCenter(Vector3Int islandPos) {
 			const int BORDER_PADDING = 10;
-			int centerX = Random.Range(x + BORDER_PADDING, x + IslandChunk.IslandChunkSize - BORDER_PADDING);
-			int centerY = Random.Range(y + BORDER_PADDING, y + IslandChunk.IslandChunkSize - BORDER_PADDING);
+			int centerX = Random.Range(islandPos.x + BORDER_PADDING, islandPos.x + IslandChunk.IslandChunkSize - BORDER_PADDING);
+			int centerY = Random.Range(islandPos.y + BORDER_PADDING, islandPos.y + IslandChunk.IslandChunkSize - BORDER_PADDING);
 			return new Vector3Int(centerX, centerY, 0);
 		}
 
@@ -59,16 +59,16 @@ namespace World.WorldGeneration {
 			}
 		}
 
-		void GenerateIslandChunk(Vector3Int centroid, int chunkX, int chunkY) {
+		void GenerateIslandChunk(IslandChunk islandChunk, Vector3Int centroid) {
 			const int BorderPadding = 2;
-			HeightMap heightMap = HeightMapGeneration.Generate(chunkX, chunkY, IslandChunk.IslandChunkSize,
+			HeightMap heightMap = HeightMapGeneration.Generate(islandChunk.Position.x, islandChunk.Position.y, IslandChunk.IslandChunkSize,
 				IslandChunk.IslandChunkSize, heightMapSettings);
-			Biome biome = BiomeGeneration.Generate(chunkX, chunkY, biomeSettings);
+			islandChunk.Biome = BiomeGeneration.Generate(islandChunk.Position.x, islandChunk.Position.y, biomeSettings);
 
 			for (int i = 0; i < BorderPadding; i++) {
 				for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
-					Vector3Int pos = new Vector3Int(i + chunkX, j + chunkY, 0);
-					Vector3Int pos2 = new Vector3Int(j + chunkX, i + chunkY, 0);
+					Vector3Int pos = new Vector3Int(i, j, 0) + islandChunk.Position;
+					Vector3Int pos2 = new Vector3Int(j, i, 0) + islandChunk.Position;
 					waterTilemap.SetTile(pos, tileSettings.waterLayer.tile);
 					waterTilemap.SetTile(pos2, tileSettings.waterLayer.tile);
 				}
@@ -76,8 +76,8 @@ namespace World.WorldGeneration {
 
 			for (int i = IslandChunk.IslandChunkSize - BorderPadding; i < IslandChunk.IslandChunkSize; i++) {
 				for (int j = 0; j < IslandChunk.IslandChunkSize; j++) {
-					Vector3Int pos = new Vector3Int(i + chunkX, j + chunkY, 0);
-					Vector3Int pos2 = new Vector3Int(j + chunkX, i + chunkY, 0);
+					Vector3Int pos = new Vector3Int(i, j, 0) + islandChunk.Position;
+					Vector3Int pos2 = new Vector3Int(j, i, 0) + islandChunk.Position;
 					waterTilemap.SetTile(pos, tileSettings.waterLayer.tile);
 					waterTilemap.SetTile(pos2, tileSettings.waterLayer.tile);
 				}
@@ -85,7 +85,7 @@ namespace World.WorldGeneration {
 
 			for (int x = BorderPadding; x < IslandChunk.IslandChunkSize - BorderPadding; x++) {
 				for (int y = BorderPadding; y < IslandChunk.IslandChunkSize - BorderPadding; y++) {
-					Vector3Int pos = new Vector3Int(x + chunkX, y + chunkY, 0);
+					Vector3Int pos = new Vector3Int(x, y, 0) + islandChunk.Position;
 
 					float height = CalculateAdjustedHeight(centroid, pos, heightMap.Values[x, y]);
 					height = Mathf.Clamp01(height);
@@ -95,7 +95,7 @@ namespace World.WorldGeneration {
 					}
 
 					if (height <= tileSettings.groundLayer.maxHeight) {
-						tilemap.SetTile(pos, biome.baseTile);
+						tilemap.SetTile(pos, islandChunk.Biome.baseTile);
 						continue;
 					}
 
@@ -107,14 +107,13 @@ namespace World.WorldGeneration {
 			}
 		}
 
-		public void GenerateMapChunk(Vector3Int pos) {
+		public void GenerateMapChunk(MapChunk mapChunk) {
 			for (int i = 0; i < MapChunk.RowSize; i++) {
 				for (int j = 0; j < MapChunk.RowSize; j++) {
-					int realIslandX = pos.x * MapChunk.MapChunkSize + i * IslandChunk.IslandChunkSize;
-					int realIslandY = pos.y * MapChunk.MapChunkSize + j * IslandChunk.IslandChunkSize;
-					Vector3Int center = GenerateRandomCenter(realIslandX, realIslandY);
+					IslandChunk islandChunk = mapChunk.GetIslandFromIndex(new Vector3Int(i, j, 0));
+					Vector3Int center = GenerateRandomCenter(islandChunk.Position);
 
-					GenerateIslandChunk(center, realIslandX, realIslandY);
+					GenerateIslandChunk(islandChunk, center);
 					//GenerateIslandChunkBorders(realIslandX, realIslandY);
 				}
 			}

@@ -34,7 +34,7 @@ namespace World {
 
 	[ExecuteInEditMode]
 	public class Map : MonoBehaviour {
-		[FormerlySerializedAs("camera")] public Camera mainCamera;
+		[FormerlySerializedAs("mainCamera")] public Camera mainCamera;
 		private Transform _cameraTransform;
 		private const int ExplorationDistance = 2;
 
@@ -78,7 +78,7 @@ namespace World {
 							Vector3Int.FloorToInt((Vector3) mousePos / (float) MapChunk.MapChunkSize);
 
 						MapChunk mapChunk = Chunks[mapChunkPos];
-						SelectedIslandChunk = mapChunk.GetIsland(mousePos);
+						SelectedIslandChunk = mapChunk.GetIslandFromMouse(mousePos);
 #if DEBUG
 						mapGui.mapChunk.text = ((Vector2Int) (mapChunkPos)).ToString();
 #endif
@@ -122,8 +122,9 @@ namespace World {
 
 		void GenerateChunk(Vector3Int pos) {
 			if (!Chunks.ContainsKey(pos)) {
-				_mapGeneration.GenerateMapChunk(pos);
-				Chunks.Add(pos, new MapChunk(pos));
+				MapChunk toGenerate = new MapChunk(pos);
+				_mapGeneration.GenerateMapChunk(toGenerate);
+				Chunks.Add(pos, toGenerate);
 			}
 		}
 
@@ -174,7 +175,11 @@ namespace World {
 			waterTilemap.ClearAllTiles();
 			tilemap.ClearAllTiles();
 			_mapGeneration = new MapGeneration(tilemap, waterTilemap, heightMapSettings, tileSettings, biomeSettings);
-			_mapGeneration.GenerateMapChunk(new Vector3Int(0, 0, 0));
+			
+			Vector3Int pos = new Vector3Int(0, 0, 0);
+			MapChunk toGenerate = new MapChunk(pos);
+			_mapGeneration.GenerateMapChunk(toGenerate);
+			Chunks.Add(pos, toGenerate);
 		}
 
 		void OnValuesUpdated() {
