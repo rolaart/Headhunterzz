@@ -18,8 +18,6 @@ namespace World {
 
 		private void Start() {
 			CreateIslandFromMap();
-
-			
 		}
 
 		private void CreateIslandFromMap() {

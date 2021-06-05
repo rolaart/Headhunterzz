@@ -7,7 +7,6 @@ namespace Characters {
 	[RequireComponent(typeof(Animator))]
 	[RequireComponent(typeof(Rigidbody2D))]
 	[RequireComponent(typeof(BoxCollider2D))]
-	[RequireComponent(typeof(CharacterStats))]
 	public class Character : MonoBehaviour {
 		public const float DefaultMoveSpeed = 2.0f;
 		public const float DefaultAttackSpeed = 2.0f;
@@ -18,12 +17,14 @@ namespace Characters {
 		public static readonly string[] runDirections =
 			{"Run N", "Run NW", "Run W", "Run SW", "Run S", "Run SE", "Run E", "Run NE"};
 
-		private Animator _animator;
+		protected Animator _animator;
+		protected Rigidbody2D _rigidbody;
 		public CharacterStats stats;
 		private int lastDirection;
 
 		protected virtual void Start() {
 			_animator = GetComponent<Animator>();
+			_rigidbody = GetComponent<Rigidbody2D>();
 		}
 
 		public void SetDirection(Vector2 direction) {

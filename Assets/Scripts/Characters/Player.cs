@@ -7,8 +7,6 @@ using UnityEngine;
 namespace Characters {
 
 	public class Player : Character {
-		private Rigidbody2D _rigidBody;
-
 		[SerializeField] 
 		private KeybindsSettings keybindsSettings;
 		[SerializeField]
@@ -16,12 +14,9 @@ namespace Characters {
 		private readonly Ability[] _abilities = new Ability[1];
 
 		private void Awake() {
-			_rigidBody = GetComponent<Rigidbody2D>();
-			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidBody);
-			
+			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
 		}
-
-
+		
 		// Update is called once per frame
 		void FixedUpdate() {
 			UpdateMovement();
@@ -43,12 +38,12 @@ namespace Characters {
 			}
 		}
 		private void UpdateMovement() {
-			Vector2 currentPos = _rigidBody.position;
+			Vector2 currentPos = _rigidbody.position;
 			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			Vector2 movement = inputVector * DefaultMoveSpeed;
 			Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
 			SetDirection(movement);
-			_rigidBody.MovePosition(newPos);
+			_rigidbody.MovePosition(newPos);
 		}
 
 		private void UpdateAbilities() {

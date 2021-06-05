@@ -1,10 +1,25 @@
-﻿using Combat;
+﻿using System;
+using Combat;
+using Pathfinding;
 using UnityEngine;
 
 namespace Characters {
 
-	public class Enemy : MonoBehaviour, IAttackable {
-		public CharacterStats stats;
+	public class Enemy : Character, IAttackable
+	{
+		private AIPath _aiPath;
+
+		private void Awake()
+		{
+			_aiPath = GetComponent<AIPath>();
+		}
+
+		void Update()
+		{
+			
+			SetDirection(_aiPath.velocity);
+		}
+
 		public void OnAttack(GameObject attacker, Attack attack) {
 			if (attack.IsCritical)
 				Debug.Log("CRITICAL DAMAGE !!");
