@@ -39,7 +39,7 @@ namespace Characters {
 		}
 		private void UpdateMovement() {
 			Vector2 currentPos = _rigidbody.position;
-			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 			Vector2 movement = inputVector * DefaultMoveSpeed;
 			Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
 			SetDirection(movement);
