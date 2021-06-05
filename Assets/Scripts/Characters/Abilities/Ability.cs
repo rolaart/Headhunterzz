@@ -27,7 +27,6 @@ namespace Characters.Abilities {
 			if (!IsUsable()) return;
 			
 			Use();
-			Debug.Log("Ability Used.");
 			Reset();
 		}
 

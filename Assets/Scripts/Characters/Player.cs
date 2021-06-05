@@ -1,5 +1,7 @@
 ﻿using System;
 using Characters.Abilities;
+using Combat;
+using Settings;
 using UnityEngine;
 
 namespace Characters {
@@ -7,11 +9,16 @@ namespace Characters {
 	public class Player : Character {
 		private Rigidbody2D _rigidBody;
 
+		[SerializeField] 
+		private KeybindsSettings keybindsSettings;
+		[SerializeField]
+		private AttackDefinition baseAttack;
 		private readonly Ability[] _abilities = new Ability[1];
 
 		private void Awake() {
 			_rigidBody = GetComponent<Rigidbody2D>();
-			_abilities[0] = new AbilityDash(KeyCode.Q, 5.0f, _rigidBody);
+			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidBody);
+			
 		}
 
 
@@ -19,8 +26,22 @@ namespace Characters {
 		void FixedUpdate() {
 			UpdateMovement();
 			UpdateAbilities();
+			UpdateAttack();
 		}
 
+		private void UpdateAttack() {
+			if (Input.GetKeyDown(keybindsSettings.attackKey)) {
+				Debug.Log("Attack Key Pressed");
+				foreach (Enemy enemy in FindObjectsOfType<Enemy>()) {
+					Debug.Log("Checking enemy");
+					var attackable = enemy.GetComponent<IAttackable>();
+					var attack = baseAttack.CreateAttack(stats, enemy.stats);
+					
+					attackable.OnAttack(gameObject, attack);
+				}
+				
+			}
+		}
 		private void UpdateMovement() {
 			Vector2 currentPos = _rigidBody.position;
 			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));

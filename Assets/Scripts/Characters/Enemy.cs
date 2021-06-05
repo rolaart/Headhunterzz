@@ -1,0 +1,16 @@
+﻿using Combat;
+using UnityEngine;
+
+namespace Characters {
+
+	public class Enemy : MonoBehaviour, IAttackable {
+		public CharacterStats stats;
+		public void OnAttack(GameObject attacker, Attack attack) {
+			if (attack.IsCritical)
+				Debug.Log("CRITICAL DAMAGE !!");
+
+			Debug.LogFormat("{0} attacked {1} for {2} damage.", attacker.name, name, attack.Damage);
+		}
+	}
+
+}

@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
+
 
 namespace World.WorldGeneration {
 
@@ -17,6 +19,10 @@ namespace World.WorldGeneration {
 		public Tile baseTile;
 		// all possible tiles for that biome
 		public Tile[] tiles;
+
+		public TileBase GetRandomTile() {
+			return tiles[Random.Range(0, tiles.Length)];
+		}
 	}
 
 }
