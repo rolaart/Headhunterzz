@@ -109,6 +109,18 @@ MonoBehaviour:
     - m_Name: gold_human_damaged
       m_Hash: -413603735
       m_Sprite: {fileID: 8120374368192836951, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -8531122980584006619, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 7236503262473740650, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 2719774145589380143, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 742992575463685940, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
   - m_Name: l_arm
     m_Hash: 1855051043
     m_CategoryList:
@@ -124,6 +136,18 @@ MonoBehaviour:
     - m_Name: gold_human_damaged
       m_Hash: -413603735
       m_Sprite: {fileID: 7343030587936360591, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -2125022131169990600, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -5252961239841877058, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 4820334695069947896, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -6313974982264882894, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
   - m_Name: r_forearm
     m_Hash: 1298909663
     m_CategoryList:
@@ -244,6 +268,18 @@ MonoBehaviour:
     - m_Name: gold_human_damaged
       m_Hash: -413603735
       m_Sprite: {fileID: -2599942048403824565, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -741217939030246894, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -1344215816382005134, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -8540842989702018429, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -7705897052442856688, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
   - m_Name: l_thigh
     m_Hash: -256819573
     m_CategoryList:
@@ -259,6 +295,18 @@ MonoBehaviour:
     - m_Name: gold_human_damaged
       m_Hash: -413603735
       m_Sprite: {fileID: -7535674084530641051, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 4882118649803885592, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 7061024810538772073, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -6267899443416207933, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 6193221381185844288, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
   - m_Name: r_leg
     m_Hash: 1557070363
     m_CategoryList:
@@ -394,3 +442,21 @@ MonoBehaviour:
     - m_Name: gold_skeleton_damaged
       m_Hash: -2108409379
       m_Sprite: {fileID: 7925892003059467443, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: head
+    m_Hash: -1477183844
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -8122788230076063048, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: skeleton
+      m_Hash: -573003478
+      m_Sprite: {fileID: -6496492916808827378, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+  - m_Name: neck
+    m_Hash: 538039891
+    m_CategoryList:
+    - m_Name: human
+      m_Hash: -1520249355
+      m_Sprite: {fileID: 5647276913090913586, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: skeleton
+      m_Hash: -573003478
+      m_Sprite: {fileID: -767617661145355386, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
