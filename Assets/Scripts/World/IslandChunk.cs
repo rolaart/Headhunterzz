@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using World.WorldGeneration;
 
 namespace World {
 
@@ -11,6 +12,8 @@ namespace World {
 	
 	public class IslandChunk {
 		public const int IslandChunkSize = 64;
+		
+		public Biome Biome;
 		// aligned to chunk coordinates
 		public readonly Vector3Int Position;
 		public readonly string Name;
@@ -22,6 +25,7 @@ namespace World {
 			Position = position;
 			Name = name;
 		}
+		
 	}
 
 }

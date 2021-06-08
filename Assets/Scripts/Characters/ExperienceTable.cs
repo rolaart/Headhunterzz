@@ -24,6 +24,11 @@
 		public static int ExperienceLeft(int level, int experience) {
 			return Requirement[level % Requirement.Length] - experience;
 		}
+
+		public static int GetExperienceAfterLevelUp(int level, int experience)
+		{
+			return experience % Requirement[level % Requirement.Length];
+		}
 	}
 
 }

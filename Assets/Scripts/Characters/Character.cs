@@ -1,5 +1,7 @@
 ﻿using System;
+using Combat;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Characters {
 
@@ -7,7 +9,7 @@ namespace Characters {
 	[RequireComponent(typeof(Animator))]
 	[RequireComponent(typeof(Rigidbody2D))]
 	[RequireComponent(typeof(BoxCollider2D))]
-	public class Character : MonoBehaviour {
+	public class Character : MonoBehaviour, IAttackable, IDestructible {
 		public const float DefaultMoveSpeed = 2.0f;
 		public const float DefaultAttackSpeed = 2.0f;
 
@@ -17,13 +19,22 @@ namespace Characters {
 		public static readonly string[] runDirections =
 			{"Run N", "Run NW", "Run W", "Run SW", "Run S", "Run SE", "Run E", "Run NE"};
 
-		private Animator _animator;
-		private Stats _stats;
-		private int lastDirection;
+		protected Animator _animator;
+		protected Rigidbody2D _rigidbody;
+		public CharacterStats stats;
+		[HideInInspector]
+		public int lastDirection;
+
+		public UnityEvent onPlayerDeath;
+
+		protected virtual void Awake()
+		{
+			stats.Restart();
+		}
 
 		protected virtual void Start() {
 			_animator = GetComponent<Animator>();
-			_stats = new Stats();
+			_rigidbody = GetComponent<Rigidbody2D>();
 		}
 
 		public void SetDirection(Vector2 direction) {
@@ -41,14 +52,16 @@ namespace Characters {
 				//use DirectionToIndex to get the index of the slice from the direction vector
 				//save the answer to lastDirection
 				directionArray = runDirections;
-				lastDirection = DirectionToIndex(direction, 8);
+				lastDirection = DirectionToIndex(direction);
 			}
 
 			//tell the animator to play the requested state
 			_animator.Play(directionArray[lastDirection]);
 		}
 
-		public static int DirectionToIndex(Vector2 dir, int sliceCount) {
+		public static int DirectionToIndex(Vector2 dir)
+		{
+			const int sliceCount = 8;
 			//get the normalized direction
 			Vector2 normDir = dir.normalized;
 			//calculate how many degrees one slice is
@@ -71,8 +84,7 @@ namespace Characters {
 			//round it, and we have the answer!
 			return Mathf.FloorToInt(stepCount);
 		}
-
-
+		
 		//this function converts a string array to a int (animator hash) array.
 		public static int[] AnimatorStringArrayToHashArray(string[] animationArray) {
 			//allocate the same array length for our hash array
@@ -84,6 +96,39 @@ namespace Characters {
 			}
 			
 			return hashArray;
+		}
+		
+		public void OnAttack(GameObject attacker, Attack attack)
+		{
+			if (attack.IsCritical)
+				Debug.Log("CRITICAL DAMAGE !!");
+
+			Debug.LogFormat("{0} attacked {1} for {2} damage.", attacker.name, name, attack.Damage);
+			
+			stats.TakeDamage(attack.Damage);
+			attacker.GetComponent<Character>().stats.RegainHealth((int) (attack.Damage * stats.RegainFromAttack));
+			
+			if (stats.GetHealth() <= 0)
+			{
+				OnDestruction(attacker);
+			}
+		}
+
+		public void OnDestruction(GameObject destroyer)
+		{
+			if (stats.isPlayer)
+			{
+				onPlayerDeath.Invoke();
+				Destroy(gameObject);
+			}
+			else
+			{
+				// give exp and gold
+				destroyer.GetComponent<Character>().stats.OnMobKilled(stats);
+				// TODO: respawn it somewhere on the map
+				gameObject.SetActive(false);
+				
+			}
 		}
 	}
 
