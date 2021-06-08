@@ -1,0 +1,462 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Human sprite library asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: helmet
+    m_Hash: 2058022566
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 7874263043400901467, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -3003685041227661713, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -3067088375924768600, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 6874086408518592452, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 5156822684226646631, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -659472858144882395, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 1616030072052783821, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 8830711983532147348, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: helmet back
+    m_Hash: -2087595067
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 8066198869717360671, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -2168580337574920563, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 7567499695523053368, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -960920151019573519, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -8240716410323574516, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 198457498810541832, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 2094735849430830132, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -4885137014857086550, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: chestplate
+    m_Hash: 1550188353
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -1532283946412556552, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -513288129356886063, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 9024258523185901884, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -7282529992934367121, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 4740858616118371453, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 5287786349906099744, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -8392358342152808644, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 2103497429158575900, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: r_arm
+    m_Hash: -1321075520
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -3261632454585818766, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 2270772012443297749, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -6079597987228406219, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 8120374368192836951, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -8531122980584006619, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 7236503262473740650, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 2719774145589380143, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 742992575463685940, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_arm
+    m_Hash: 1855051043
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -877291775317110124, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -2882706313638273085, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -8307517872180762233, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 7343030587936360591, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -2125022131169990600, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -5252961239841877058, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 4820334695069947896, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -6313974982264882894, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: r_forearm
+    m_Hash: 1298909663
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 1372340026615828856, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -567188690447895476, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 2660457036764939844, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 237690896255051112, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -4292108100784367610, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -3344623523138769748, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 7694434961720618497, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 237690896255051112, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_forearm
+    m_Hash: 694767676
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -1191608440113620789, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 3995693268902872087, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 45374572936434922, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -2497034714886715308, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+  - m_Name: r_hand
+    m_Hash: 1263388896
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 4427666567598510423, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 3991760017841088861, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -5196406036904591123, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 1242726994978581237, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 6063923797301339657, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -8264567599636928006, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -7464860219484241635, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -1364368294989995961, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_hand
+    m_Hash: 1922149131
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 1294925991464809567, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 5965090911003460976, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 5343795473541564672, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 3659893837691192914, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -6400555613844676472, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -2295372979412791902, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 2337437684208436201, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -1024135828722305777, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: pelvis
+    m_Hash: -1215432594
+    m_CategoryList:
+    - m_Name: silver
+      m_Hash: 794499163
+      m_Sprite: {fileID: 648208013374485273, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: gold
+      m_Hash: 1202265425
+      m_Sprite: {fileID: 5815915332782546024, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+  - m_Name: r_thigh
+    m_Hash: -951002856
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 5139158404468087143, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 4806558964477485770, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -8583090762855199235, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -2599942048403824565, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -741217939030246894, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -1344215816382005134, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -8540842989702018429, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -7705897052442856688, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_thigh
+    m_Hash: -256819573
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 1599585076852188108, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -6347769806199542249, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 9182733217983579357, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -7535674084530641051, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 4882118649803885592, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 7061024810538772073, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -6267899443416207933, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 6193221381185844288, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: r_leg
+    m_Hash: 1557070363
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -6432419314077148152, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 5878060252812904646, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -2900226356855584806, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 3384713485992327714, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 2988727889622900308, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 6589482758699580385, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -1651187446854150022, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 2647202181724900534, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_leg
+    m_Hash: -2095109128
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -198931962337834542, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -6141298179010525695, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 4385582832565026462, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 8623726186217432558, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 2931178823372604370, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -6799407453844292411, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -3825627268357904033, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 8664763309238023223, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: r_foot
+    m_Hash: -1516194820
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 5494223404035382223, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -5812622964149105665, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: -1577369486346815327, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: -2360147680895828462, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 8392986409920367527, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 1932212763657624578, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: -7132205270546443437, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: -1189117232419381748, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: l_foot
+    m_Hash: -1669541865
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -1406122648171041879, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: -2882276975195616156, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 8854673357534851448, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 7346860416487760444, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: -5502245803123340750, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: -5157315705906277036, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 644343645929823958, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 1321837324381259612, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: weapon
+    m_Hash: 1764992998
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: 8476680503662094113, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: silver_human_damaged
+      m_Hash: 1793164823
+      m_Sprite: {fileID: 3890768989025202788, guid: dfc0b423d4e76e5458bea3744c5418a8, type: 3}
+    - m_Name: gold_human
+      m_Hash: 894336194
+      m_Sprite: {fileID: 2150979863627679409, guid: bc0596e6c40695642b11478b00cd432a, type: 3}
+    - m_Name: gold_human_damaged
+      m_Hash: -413603735
+      m_Sprite: {fileID: 8925558392407721994, guid: e92ee632553c183479cc6576bf44f433, type: 3}
+    - m_Name: silver_skeleton
+      m_Hash: 2070483921
+      m_Sprite: {fileID: 4742604808086987473, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+    - m_Name: silver_skeleton_damaged
+      m_Hash: -1778896629
+      m_Sprite: {fileID: 455868716242654541, guid: b30dae7149c43484fae6ba23294882a8, type: 3}
+    - m_Name: gold_skeleton
+      m_Hash: -1310641684
+      m_Sprite: {fileID: 6483698064897464353, guid: 7c26259867b5b0c479faea8c17e64e05, type: 3}
+    - m_Name: gold_skeleton_damaged
+      m_Hash: -2108409379
+      m_Sprite: {fileID: 7925892003059467443, guid: 0bbc76f2443337548a0d112d3380f1c5, type: 3}
+  - m_Name: head
+    m_Hash: -1477183844
+    m_CategoryList:
+    - m_Name: silver_human
+      m_Hash: 916362336
+      m_Sprite: {fileID: -8122788230076063048, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: skeleton
+      m_Hash: -573003478
+      m_Sprite: {fileID: -6496492916808827378, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
+  - m_Name: neck
+    m_Hash: 538039891
+    m_CategoryList:
+    - m_Name: human
+      m_Hash: -1520249355
+      m_Sprite: {fileID: 5647276913090913586, guid: 586b6d4172b7a6c4fa17ce241a0ddaff, type: 3}
+    - m_Name: skeleton
+      m_Hash: -573003478
+      m_Sprite: {fileID: -767617661145355386, guid: 2858c7b52bcd61247b0dc8a020512054, type: 3}
