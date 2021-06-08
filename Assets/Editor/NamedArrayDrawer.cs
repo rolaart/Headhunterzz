@@ -1,6 +1,7 @@
-﻿using Characters;
+﻿
 using UnityEngine;
 using UnityEditor;
+using Utils.Attributes;
 
 namespace Editor {
 

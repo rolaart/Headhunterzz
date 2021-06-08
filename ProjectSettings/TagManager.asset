@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Collision Layer
   - Water
   - UI
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2072391041
+    locked: 0
+  - name: UI
+    uniqueID: 1716213313
     locked: 0

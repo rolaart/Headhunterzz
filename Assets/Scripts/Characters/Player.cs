@@ -3,24 +3,25 @@ using Characters.Abilities;
 using Combat;
 using Settings;
 using UnityEngine;
+using UnityEngine.Events;
+using Utils;
 
 namespace Characters {
 
 	public class Player : Character {
-		private Rigidbody2D _rigidBody;
-
 		[SerializeField] 
 		private KeybindsSettings keybindsSettings;
 		[SerializeField]
 		private AttackDefinition baseAttack;
 		private readonly Ability[] _abilities = new Ability[1];
-
-		private void Awake() {
-			_rigidBody = GetComponent<Rigidbody2D>();
-			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidBody);
+		private float timeOfLastAttack = float.MinValue;
+		
+		protected override void Awake() {
+			base.Awake();
+			stats.isPlayer = true;
+			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
 			
 		}
-
 
 		// Update is called once per frame
 		void FixedUpdate() {
@@ -31,24 +32,27 @@ namespace Characters {
 
 		private void UpdateAttack() {
 			if (Input.GetKeyDown(keybindsSettings.attackKey)) {
-				Debug.Log("Attack Key Pressed");
+				float timeSinceLastAttack = Time.time - timeOfLastAttack;
+				bool canAttack = timeSinceLastAttack > baseAttack.Cooldown;
+				
+				if (!canAttack) return;
+				
+				timeOfLastAttack = Time.time;
+				
+				SoundManager.Instance.Play(SoundType.SoundWeaponAttack);
 				foreach (Enemy enemy in FindObjectsOfType<Enemy>()) {
-					Debug.Log("Checking enemy");
-					var attackable = enemy.GetComponent<IAttackable>();
-					var attack = baseAttack.CreateAttack(stats, enemy.stats);
-					
-					attackable.OnAttack(gameObject, attack);
+					((Weapon) baseAttack).ExecuteAttack(gameObject, enemy.gameObject);
 				}
 				
 			}
 		}
 		private void UpdateMovement() {
-			Vector2 currentPos = _rigidBody.position;
-			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			Vector2 currentPos = _rigidbody.position;
+			Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 			Vector2 movement = inputVector * DefaultMoveSpeed;
 			Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
 			SetDirection(movement);
-			_rigidBody.MovePosition(newPos);
+			_rigidbody.MovePosition(newPos);
 		}
 
 		private void UpdateAbilities() {
@@ -56,6 +60,40 @@ namespace Characters {
 				ability.Update();
 			}
 		}
+
+		#region Events
+
+		public void RegisterOnLevelUpListener(UnityAction listener)
+		{
+			stats.RegisterOnLevelUpListener(listener);
+		}
+
+		public void RegisterOnDamagedListener(UnityAction listener)
+		{
+			stats.RegisterOnDamagedListener(listener);
+		}
+
+		public void RegisterOnGainedHealthListener(UnityAction listener)
+		{
+			stats.RegisterOnGainedHealthListener(listener);
+		}
+		
+		public void RegisterOnExperienceGainedListener(UnityAction listener)
+		{
+			stats.RegisterOnExperienceGainedListener(listener);
+		}
+		public void RegisterOnDeathListener(UnityAction listener)
+		{
+			onPlayerDeath.AddListener(listener);
+		}
+		
+		public void RegisterOnMobKilledListener(UnityAction listener)
+		{
+			stats.RegisterOnMobKilledListener(listener);
+		}
+
+		#endregion
+		
 	}
 
 }

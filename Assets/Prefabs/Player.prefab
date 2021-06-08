@@ -118,8 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5295e6a0f5e54e2a9a825e5c92fa4819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 07b4559dad4378b4d9e4a0499f15bf5c, type: 2}
+  lastDirection: 0
+  isPlayer: 0
   keybindsSettings: {fileID: 11400000, guid: 10ef2a14e6a17954a81555e75f6f6227, type: 2}
-  baseAttack: {fileID: 11400000, guid: 304ab3813c53665489e6ae16a1630e82, type: 2}
+  baseAttack: {fileID: 11400000, guid: d7b80b25035836d4b8ef979919d2cabc, type: 2}
 --- !u!50 &490326553187376573
 Rigidbody2D:
   serializedVersion: 4
