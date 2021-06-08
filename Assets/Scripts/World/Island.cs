@@ -2,21 +2,22 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace World {
 
-	public class Island : MonoBehaviour {
-
+	public class Island : MonoBehaviour
+	{
 		public Tilemap tilemap;
 		public Tilemap waterTilemap;
 		public Tilemap colliderTilemap;
 
 		public TileBase collideTile;
 
-		public GameObject player;
-
 		private void Start() {
+			GameManager.Instance.InitializePlayer();
+			
 			CreateIslandFromMap();
 		}
 
@@ -26,6 +27,7 @@ namespace World {
 			Assert.IsNotNull(map.tilemap);
 			Vector3Int pos = map.SelectedIslandChunk.Position;
 
+			tilemap.ClearAllTiles();
 			TileBase waterTile = map.waterTilemap.GetTile(Vector3Int.zero);
 			for (int i = -IslandChunk.IslandChunkSize; i < IslandChunk.IslandChunkSize * 2; i++) {
 				for (int j = -IslandChunk.IslandChunkSize; j < IslandChunk.IslandChunkSize * 2; j++) {
@@ -76,7 +78,9 @@ namespace World {
 					Vector3Int spawnPos = new Vector3Int(x, y, 0);
 					if (tilemap.HasTile(spawnPos)) {
 						// FIXME
-						player.transform.position = tilemap.CellToWorld(spawnPos + new Vector3Int(4, 4, 0));
+						Vector3 position = tilemap.CellToWorld(spawnPos + new Vector3Int(4, 4, 0));
+						GameManager.Instance.player.transform.position = position;
+						GameManager.Instance.OnPlayerRespawned();
 						return;
 					}
 				}

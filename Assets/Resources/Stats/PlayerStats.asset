@@ -12,10 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143675a6f1ed40c8af229c5aa865f0f0, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Strength: 10
+  onLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerExperienceGained:
+    m_PersistentCalls:
+      m_Calls: []
+  onMobKilled:
+    m_PersistentCalls:
+      m_Calls: []
+  isPlayer: 1
+  Strength: 5
   Stamina: 10
   Luck: 10
   Charisma: 10
-  Experience: 0
-  Level: 0
-  Lifesteal: 0
+  Experience: 270
+  Level: 1
+  Lifesteal: 10

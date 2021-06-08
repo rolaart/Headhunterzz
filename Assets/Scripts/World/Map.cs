@@ -10,31 +10,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Utils;
 using World.WorldGeneration;
 
 
 namespace World {
 
-	[Serializable]
-	public struct MapGUI {
-		[SerializeField] public GameObject panel;
-		
-		[SerializeField] public TextMeshProUGUI islandName;
-
-		[SerializeField] public TextMeshProUGUI islandMin;
-		
-#if DEBUG
-		[SerializeField] public TextMeshProUGUI islandMax;
-
-		[SerializeField] public TextMeshProUGUI islandChunk;
-
-		[SerializeField] public TextMeshProUGUI mapChunk;
-#endif
-	}
-
 	[ExecuteInEditMode]
 	public class Map : MonoBehaviour {
-		[FormerlySerializedAs("mainCamera")] public Camera mainCamera;
+		public Camera mainCamera;
 		private Transform _cameraTransform;
 		private const int ExplorationDistance = 2;
 
@@ -49,12 +33,8 @@ namespace World {
 		[SerializeField]
 		public MapGeneration _mapGeneration;
 		public Dictionary<Vector3Int, MapChunk> Chunks = new Dictionary<Vector3Int, MapChunk>();
-
-		public MapGUI mapGui;
+		
 		public GameObject selectedIslandHoverEffect;
-
-		public TextMeshProUGUI mousePosDebug;
-
 		
 		public void Start() {
 			
@@ -71,7 +51,6 @@ namespace World {
 			if (Application.isPlaying) {
 				ExploreNewCoordinates();
 				Vector3Int mousePos = tilemap.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition));
-				mousePosDebug.text = ((Vector2Int) (mousePos)).ToString();
 				if (Input.GetMouseButtonDown(0)) {
 					if (IsIslandMouseHit(mousePos)) {
 						Vector3Int mapChunkPos =
@@ -79,17 +58,14 @@ namespace World {
 
 						MapChunk mapChunk = Chunks[mapChunkPos];
 						SelectedIslandChunk = mapChunk.GetIslandFromMouse(mousePos);
-#if DEBUG
-						mapGui.mapChunk.text = ((Vector2Int) (mapChunkPos)).ToString();
-#endif
 						UpdateIslandHover();
 						UpdateIslandBoundsIfNeeded();
-						UpdateGUI();
+						UIManager.Instance.ShowMapGui(SelectedIslandChunk);
 					}
 					else {
 						if (!EventSystem.current.IsPointerOverGameObject()) {
 							selectedIslandHoverEffect.SetActive(false);
-							mapGui.panel.SetActive(false);
+							UIManager.Instance.HideMapGui();
 						}
 					}
 				}
@@ -128,10 +104,6 @@ namespace World {
 			}
 		}
 
-		public void TeleportToIsland() {
-			SceneManager.LoadScene("IslandScene");
-		}
-
 		public bool IsIslandMouseHit(Vector3Int mousePos) {
 			return tilemap.HasTile(mousePos);
 		}
@@ -160,16 +132,11 @@ namespace World {
 			}
 		}
 
-		private void UpdateGUI() {
-			mapGui.panel.SetActive(true);
-			mapGui.islandName.text = SelectedIslandChunk.Name;
-			mapGui.islandMin.text = ((Vector2Int) (SelectedIslandChunk.Min)).ToString();
-#if DEBUG
-			mapGui.islandMax.text = ((Vector2Int) (SelectedIslandChunk.Max)).ToString();
-			mapGui.islandChunk.text = ((Vector2Int) (SelectedIslandChunk.Position)).ToString();
-#endif
+		public void TeleportToSelectedIsland()
+		{
+			GameManager.Instance.OnIslandVisit(SelectedIslandChunk);
 		}
-		
+
 #if UNITY_EDITOR
 		public void Generate() {
 			waterTilemap.ClearAllTiles();

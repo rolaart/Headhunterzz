@@ -3,6 +3,8 @@ using Characters.Abilities;
 using Combat;
 using Settings;
 using UnityEngine;
+using UnityEngine.Events;
+using Utils;
 
 namespace Characters {
 
@@ -12,11 +14,15 @@ namespace Characters {
 		[SerializeField]
 		private AttackDefinition baseAttack;
 		private readonly Ability[] _abilities = new Ability[1];
-
-		private void Awake() {
-			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
-		}
+		private float timeOfLastAttack = float.MinValue;
 		
+		protected override void Awake() {
+			base.Awake();
+			stats.isPlayer = true;
+			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
+			
+		}
+
 		// Update is called once per frame
 		void FixedUpdate() {
 			UpdateMovement();
@@ -26,13 +32,16 @@ namespace Characters {
 
 		private void UpdateAttack() {
 			if (Input.GetKeyDown(keybindsSettings.attackKey)) {
-				Debug.Log("Attack Key Pressed");
+				float timeSinceLastAttack = Time.time - timeOfLastAttack;
+				bool canAttack = timeSinceLastAttack > baseAttack.Cooldown;
+				
+				if (!canAttack) return;
+				
+				timeOfLastAttack = Time.time;
+				
+				SoundManager.Instance.Play(SoundType.SoundWeaponAttack);
 				foreach (Enemy enemy in FindObjectsOfType<Enemy>()) {
-					Debug.Log("Checking enemy");
-					var attackable = enemy.GetComponent<IAttackable>();
-					var attack = baseAttack.CreateAttack(stats, enemy.stats);
-					
-					attackable.OnAttack(gameObject, attack);
+					((Weapon) baseAttack).ExecuteAttack(gameObject, enemy.gameObject);
 				}
 				
 			}
@@ -51,6 +60,40 @@ namespace Characters {
 				ability.Update();
 			}
 		}
+
+		#region Events
+
+		public void RegisterOnLevelUpListener(UnityAction listener)
+		{
+			stats.RegisterOnLevelUpListener(listener);
+		}
+
+		public void RegisterOnDamagedListener(UnityAction listener)
+		{
+			stats.RegisterOnDamagedListener(listener);
+		}
+
+		public void RegisterOnGainedHealthListener(UnityAction listener)
+		{
+			stats.RegisterOnGainedHealthListener(listener);
+		}
+		
+		public void RegisterOnExperienceGainedListener(UnityAction listener)
+		{
+			stats.RegisterOnExperienceGainedListener(listener);
+		}
+		public void RegisterOnDeathListener(UnityAction listener)
+		{
+			onPlayerDeath.AddListener(listener);
+		}
+		
+		public void RegisterOnMobKilledListener(UnityAction listener)
+		{
+			stats.RegisterOnMobKilledListener(listener);
+		}
+
+		#endregion
+		
 	}
 
 }
