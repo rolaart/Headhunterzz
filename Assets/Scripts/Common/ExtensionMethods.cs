@@ -19,5 +19,29 @@ namespace Common
             var vectorToTarget = target.transform.position - gameObject.transform.position;
             gameObject.GetComponent<Character>().SetDirection(vectorToTarget);
         }
+
+        public static Vector3Int ModulusNegative(this Vector3Int vec, int mod)
+        {
+            vec.x %= mod;
+            vec.y %= mod;
+            vec.z %= mod;
+            
+            if (vec.x < 0)
+            {
+                vec.x += mod;
+            }
+
+            if (vec.y < 0)
+            {
+                vec.y += mod;
+            }
+
+            if (vec.z < 0)
+            {
+                vec.z += mod;
+            }
+
+            return vec;
+        }
     }
 }
