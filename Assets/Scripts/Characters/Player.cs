@@ -15,6 +15,8 @@ namespace Characters {
 		private AttackDefinition baseAttack;
 		private readonly Ability[] _abilities = new Ability[1];
 		private float timeOfLastAttack = float.MinValue;
+
+		public readonly Inventory.Inventory Inventory = new Inventory.Inventory();
 		
 		protected override void Awake() {
 			base.Awake();

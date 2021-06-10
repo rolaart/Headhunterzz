@@ -1,4 +1,5 @@
 ﻿using System;
+using Items;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,6 +24,8 @@ namespace Characters
         private int _availablePoints = 0;
         private const int PointsPerLevel = 5;
 
+        #region Core Stats
+        
         public int Strength;
 
         public int Stamina;
@@ -37,6 +40,13 @@ namespace Characters
 
         public int Lifesteal;
 
+        #endregion
+
+        #region Equippable Items
+
+        public ItemDefinition Weapon;
+
+        #endregion
         // TODO Play with the coefficients scaling 
         public int Damage => Strength * 10;
         public int MaxHealth => Stamina * 10;
@@ -100,6 +110,11 @@ namespace Characters
 
             onPlayerExperienceGained.Invoke();
             onMobKilled.Invoke(mobId);
+        }
+
+        public void GiveGold(int amount)
+        {
+            gold += amount;
         }
 
         /** Should be called for the UI */
