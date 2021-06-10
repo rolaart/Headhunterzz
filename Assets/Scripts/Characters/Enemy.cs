@@ -3,7 +3,7 @@ using Combat;
 using Common;
 using Pathfinding;
 using UnityEngine;
-using Utils;
+using Utils.Managers;
 using Random = UnityEngine.Random;
 
 namespace Characters

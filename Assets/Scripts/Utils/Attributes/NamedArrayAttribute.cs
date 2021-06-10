@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using Utils;
+using Utils.Managers;
 
 namespace Utils.Attributes
 {

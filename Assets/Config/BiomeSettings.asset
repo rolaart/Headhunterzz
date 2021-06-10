@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b957e20a64de1ba4ba7999f5fa339972, type: 3}
   m_Name: BiomeSettings
   m_EditorClassIdentifier: 
-  autoUpdate: 1
+  autoUpdate: 0
   temperatureNoiseSettings:
     scale: 10
     octaves: 6
@@ -40,6 +40,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3c38dec03393d794bb40b1de6501348f, type: 2}
     - {fileID: 11400000, guid: a5901fcb290ce2f43bcf2f6647f442e4, type: 2}
     - {fileID: 11400000, guid: 9ede2f3b6cbee394da03f5bff5c5a60a, type: 2}
+    - {fileID: 11400000, guid: 792c852ea545d8d45aa8fea77516915a, type: 2}
   - name: Graveyard
     maxTemperature: 0.25
     maxHumidity: 0.22
@@ -72,7 +73,6 @@ MonoBehaviour:
     maxHumidity: 0.028
     baseTile: {fileID: 11400000, guid: a769e715e671a5b42a921dc908c70388, type: 2}
     tiles:
-    - {fileID: 11400000, guid: 4ffec5ce59d113348adf0b5cf29ad807, type: 2}
     - {fileID: 11400000, guid: f9ae38a7cefa4074ab70a89b12766fea, type: 2}
     - {fileID: 11400000, guid: 4880f0e1dd812df4089e6c4b427ad4f7, type: 2}
     - {fileID: 11400000, guid: 80890a862fb1a794c89bf00fa13046b2, type: 2}

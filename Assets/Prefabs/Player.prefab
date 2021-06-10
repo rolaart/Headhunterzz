@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 490326553187376571}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 07b4559dad4378b4d9e4a0499f15bf5c, type: 2}
   lastDirection: 0
-  isPlayer: 0
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
   keybindsSettings: {fileID: 11400000, guid: 10ef2a14e6a17954a81555e75f6f6227, type: 2}
   baseAttack: {fileID: 11400000, guid: d7b80b25035836d4b8ef979919d2cabc, type: 2}
 --- !u!50 &490326553187376573

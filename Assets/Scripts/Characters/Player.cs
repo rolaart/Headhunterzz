@@ -4,7 +4,7 @@ using Combat;
 using Settings;
 using UnityEngine;
 using UnityEngine.Events;
-using Utils;
+using Utils.Managers;
 
 namespace Characters {
 
@@ -18,7 +18,7 @@ namespace Characters {
 		
 		protected override void Awake() {
 			base.Awake();
-			stats.isPlayer = true;
+
 			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
 			
 		}
@@ -87,7 +87,7 @@ namespace Characters {
 			onPlayerDeath.AddListener(listener);
 		}
 		
-		public void RegisterOnMobKilledListener(UnityAction listener)
+		public void RegisterOnMobKilledListener(UnityAction<int> listener)
 		{
 			stats.RegisterOnMobKilledListener(listener);
 		}

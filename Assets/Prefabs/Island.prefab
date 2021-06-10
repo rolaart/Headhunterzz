@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883119514368099186}
   - component: {fileID: 4883119514368099189}
-  - component: {fileID: 4883119514368099187}
+  - component: {fileID: -4897695784251903430}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -48,7 +48,7 @@ Grid:
   m_CellGap: {x: -0.14, y: -0.07, z: 0}
   m_CellLayout: 3
   m_CellSwizzle: 0
---- !u!114 &4883119514368099187
+--- !u!114 &-4897695784251903430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

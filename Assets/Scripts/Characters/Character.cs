@@ -116,7 +116,7 @@ namespace Characters {
 
 		public void OnDestruction(GameObject destroyer)
 		{
-			if (stats.isPlayer)
+			if (stats.IsPlayer)
 			{
 				onPlayerDeath.Invoke();
 				Destroy(gameObject);
@@ -125,9 +125,6 @@ namespace Characters {
 			{
 				// give exp and gold
 				destroyer.GetComponent<Character>().stats.OnMobKilled(stats);
-				// TODO: respawn it somewhere on the map
-				gameObject.SetActive(false);
-				
 			}
 		}
 	}

@@ -3,14 +3,10 @@
 using System;
 using System.Collections.Generic;
 using Settings;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
-using Utils;
+using Utils.Managers;
 using World.WorldGeneration;
 
 
@@ -30,11 +26,13 @@ namespace World {
 		public TileSettings tileSettings;
 		public BiomeSettings biomeSettings;
 		
+		public GameObject selectedIslandHoverEffect;
+		
 		[SerializeField]
 		public MapGeneration _mapGeneration;
 		public Dictionary<Vector3Int, MapChunk> Chunks = new Dictionary<Vector3Int, MapChunk>();
 		
-		public GameObject selectedIslandHoverEffect;
+		
 		
 		public void Start() {
 			
@@ -127,8 +125,7 @@ namespace World {
 					}
 				}
 
-				SelectedIslandChunk.Min = min;
-				SelectedIslandChunk.Max = max;
+				SelectedIslandChunk.SetBounds(min, max);
 			}
 		}
 
