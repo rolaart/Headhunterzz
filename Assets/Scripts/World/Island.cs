@@ -55,6 +55,8 @@ namespace World
 
         private void CreateIslandFromMap()
         {
+            if (GameManager.Instance.CurrentGameState == GameState.Testing) return;
+            
             Map map = FindObjectOfType<Map>();
 
             Assert.IsNotNull(map);

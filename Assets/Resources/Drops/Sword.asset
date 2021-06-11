@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a6cea3f1cf4b1d9579665085ff1a32, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  name: 
-  type: 0
+  name: Silver Sword
+  type: 2
+  subType: 0
   amount: 0
-  spawnChance: 0
+  spawnChance: 5
   material: {fileID: 0}
-  icon: {fileID: 0}
-  spawnObject: {fileID: 0}
+  icon: {fileID: 21300000, guid: b438c02c9a9db4c0eacdb6c48966e1c0, type: 3}
+  spawnObject: {fileID: 2592785636500772707, guid: 85dfdf91b24256f4b8f6ef0f7ff7910a, type: 3}
+  storable: 1
+  stackable: 0
+  maxCountPerStack: 0

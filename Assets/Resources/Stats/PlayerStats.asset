@@ -24,14 +24,12 @@ MonoBehaviour:
   onPlayerExperienceGained:
     m_PersistentCalls:
       m_Calls: []
-  onMobKilled:
-    m_PersistentCalls:
-      m_Calls: []
-  isPlayer: 1
-  Strength: 5
-  Stamina: 10
+  IsPlayer: 1
+  Strength: 15
+  Stamina: 1000
   Luck: 10
   Charisma: 10
-  Experience: 270
-  Level: 1
+  Experience: 770
+  Level: 2
   Lifesteal: 10
+  Weapon: {fileID: 0}

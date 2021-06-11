@@ -24,11 +24,16 @@ namespace Utils.Managers
         private void Start()
         {
             Assert.IsTrue(enemyPrefabs.Length > 0);
+
+            
         }
 
         public void OnIslandVisit(IslandDifficulty islandDifficulty)
         {
-            Debug.Log("Spawner OnIslandVisit");
+            if (GameManager.Instance.CurrentGameState == GameState.Testing)
+            {
+                lastSpawnSpot = Vector3.back * 10000000;
+            }
             int total = 0;
             switch (islandDifficulty)
             {
@@ -105,10 +110,13 @@ namespace Utils.Managers
                 }
 
                 var enemy = currentEnemies[nextEnemyId];
+                var enemyComponent = enemy.GetComponent<Enemy>();
                 enemy.transform.position = Island.Instance.tilemap.CellToWorld(cellPos);
-                enemy.GetComponent<Character>().stats.mobId = nextEnemyId;
-                enemy.GetComponent<Enemy>().target = GameManager.Instance.player.transform;
+                enemyComponent.mobId = nextEnemyId;
+                enemyComponent.target = GameManager.Instance.player.transform;
                 enemy.SetActive(true);
+                
+                Assert.IsFalse(enemyComponent.mobId == -1);
             }
         }
 

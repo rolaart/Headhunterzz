@@ -34,6 +34,8 @@ namespace Characters
 
         private Vector2 lastWanderDirection = Vector2.zero;
 
+        // for object pooling
+        public int mobId = -1;
 
         protected override void Awake()
         {

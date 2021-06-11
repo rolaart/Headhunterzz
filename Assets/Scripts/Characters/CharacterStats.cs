@@ -12,13 +12,9 @@ namespace Characters
         [HideInInspector] public UnityEvent onPlayerDamaged;
         [HideInInspector] public UnityEvent onPlayerHealed;
         [HideInInspector] public UnityEvent onPlayerExperienceGained;
-        [HideInInspector] public UnityEvent<int> onMobKilled;
-
-        // for object pooling
-        [HideInInspector] public int mobId = -1;
 
         // unless the object pooling index is set, it is a player
-        public bool IsPlayer => mobId < 0;
+        public bool IsPlayer = false;
 
 
         private int _availablePoints = 0;
@@ -100,7 +96,7 @@ namespace Characters
 
         public void OnMobKilled(CharacterStats stats)
         {
-            gold += stats.gold;
+            Debug.Log("Enemy killed");
             Experience += stats.Experience;
 
             if (ExperienceTable.ShouldLevelUp(Level, Experience))
@@ -109,12 +105,11 @@ namespace Characters
             }
 
             onPlayerExperienceGained.Invoke();
-            onMobKilled.Invoke(mobId);
         }
 
         public void GiveGold(int amount)
         {
-            gold += amount;
+            gold += amount + (int)(amount * AdditionalGold);
         }
 
         /** Should be called for the UI */
@@ -143,11 +138,6 @@ namespace Characters
         public void RegisterOnExperienceGainedListener(UnityAction listener)
         {
             onPlayerExperienceGained.AddListener(listener);
-        }
-
-        public void RegisterOnMobKilledListener(UnityAction<int> listener)
-        {
-            onMobKilled.AddListener(listener);
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using Characters;
+﻿using System;
+using Characters;
 using UnityEngine;
 using Utils.Managers;
 
@@ -6,12 +7,12 @@ namespace Items
 {
     public class ItemPickUp : MonoBehaviour
     {
-        public ItemDefinition itemDefinition;
+        [HideInInspector] public ItemDefinition itemDefinition;
         
         
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.gameObject.CompareTag("Player")) return;
 
             var stats = other.GetComponent<Character>().stats;
 
@@ -26,6 +27,8 @@ namespace Items
            
             
         }
+        
+        
 
         private void UseItem(CharacterStats stats)
         {
@@ -37,7 +40,11 @@ namespace Items
                 case ItemType.Gold:
                     stats.GiveGold(itemDefinition.amount);
                     break;
+                default:
+                    throw new NotImplementedException();
             }
+            
+            Destroy(gameObject);
         }
         
     }

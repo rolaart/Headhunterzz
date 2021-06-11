@@ -57,6 +57,7 @@ namespace Inventory
                 nextFreeColumn = 0;
                 nextFreeRow++;
             }
+            
         }
 
         private void AddStackable(ItemDefinition item)

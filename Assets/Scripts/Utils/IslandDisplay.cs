@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Utils
 {
     public class IslandDisplay : MonoBehaviour
     {
-        [SerializeField] private Animation animation;
+        [FormerlySerializedAs("animation")] [SerializeField] private Animation fadeAnimation;
 
         public UnityEvent onFadeInAndOutAnimationClip;
 
@@ -22,7 +23,7 @@ namespace Utils
 
         public void FadeIn()
         {
-            animation.Play();
+            fadeAnimation.Play();
         }
     }
 }

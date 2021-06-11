@@ -1,5 +1,6 @@
 ﻿using System;
 using Combat;
+using Items;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +12,6 @@ namespace Characters {
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class Character : MonoBehaviour, IAttackable, IDestructible {
 		public const float DefaultMoveSpeed = 2.0f;
-		public const float DefaultAttackSpeed = 2.0f;
 
 		public static readonly string[] staticDirections =
 			{"Static N", "Static NW", "Static W", "Static SW", "Static S", "Static SE", "Static E", "Static NE"};
@@ -21,14 +21,19 @@ namespace Characters {
 
 		protected Animator _animator;
 		protected Rigidbody2D _rigidbody;
-		public CharacterStats stats;
-		[HideInInspector]
-		public int lastDirection;
 
-		public UnityEvent onPlayerDeath;
+		[SerializeField] private CharacterStats statsTemplate;
+		[HideInInspector] public CharacterStats stats;
+		[HideInInspector] public int lastDirection;
+
+		[HideInInspector] public UnityEvent onPlayerDeath;
+		[HideInInspector] public UnityEvent<int> onMobKilled;
 
 		protected virtual void Awake()
 		{
+			if (statsTemplate == null) throw new NullReferenceException();
+
+			stats = Instantiate(statsTemplate);
 			stats.Restart();
 		}
 
@@ -100,12 +105,16 @@ namespace Characters {
 		
 		public void OnAttack(GameObject attacker, Attack attack)
 		{
-			if (attack.IsCritical)
-				Debug.Log("CRITICAL DAMAGE !!");
-
-			Debug.LogFormat("{0} attacked {1} for {2} damage.", attacker.name, name, attack.Damage);
-			
 			stats.TakeDamage(attack.Damage);
+
+			if (true)
+			{
+				if (attack.IsCritical)
+					Debug.Log("CRITICAL DAMAGE !!");
+				Debug.LogFormat("{0} attacked {1} for {2} damage. {3} Health Left", attacker.name, name, attack.Damage, stats.GetHealth());
+			}
+			
+			
 			attacker.GetComponent<Character>().stats.RegainHealth((int) (attack.Damage * stats.RegainFromAttack));
 			
 			if (stats.GetHealth() <= 0)
@@ -123,8 +132,12 @@ namespace Characters {
 			}
 			else
 			{
-				// give exp and gold
-				destroyer.GetComponent<Character>().stats.OnMobKilled(stats);
+				// give exp
+				var playerCharacter = destroyer.GetComponent<Character>();
+				playerCharacter.stats.OnMobKilled(stats);
+				playerCharacter.onMobKilled.Invoke(GetComponent<Enemy>().mobId);
+				// drop
+				GetComponent<ItemDrop>().Drop();
 			}
 		}
 	}

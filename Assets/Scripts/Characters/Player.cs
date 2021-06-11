@@ -22,7 +22,7 @@ namespace Characters {
 			base.Awake();
 
 			_abilities[0] = new AbilityDash(keybindsSettings.dashKey, 5.0f, _rigidbody);
-			
+			stats.IsPlayer = true;
 		}
 
 		// Update is called once per frame
@@ -36,9 +36,14 @@ namespace Characters {
 			if (Input.GetKeyDown(keybindsSettings.attackKey)) {
 				float timeSinceLastAttack = Time.time - timeOfLastAttack;
 				bool canAttack = timeSinceLastAttack > baseAttack.Cooldown;
+
+				if (!canAttack)
+				{
+					Debug.Log("Player failed attacking");
+					return;
+				}
 				
-				if (!canAttack) return;
-				
+				Debug.Log("Player attacked");
 				timeOfLastAttack = Time.time;
 				
 				SoundManager.Instance.Play(SoundType.SoundWeaponAttack);
@@ -91,7 +96,7 @@ namespace Characters {
 		
 		public void RegisterOnMobKilledListener(UnityAction<int> listener)
 		{
-			stats.RegisterOnMobKilledListener(listener);
+			onMobKilled.AddListener(listener);
 		}
 
 		#endregion

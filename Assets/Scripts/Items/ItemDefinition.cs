@@ -14,6 +14,7 @@ namespace Items
 
     public enum ItemSubType
     {
+        None,
         Helm,
         Chest,
         Legs,
@@ -28,8 +29,7 @@ namespace Items
         public ItemSubType subType;
         public int amount;
         public int spawnChance;
-
-        public Material material;
+        
         public Sprite icon;
         public Rigidbody2D spawnObject;
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WeaponAttack
   m_EditorClassIdentifier: 
   Cooldown: 1.5
-  Range: 1
+  Range: 2
   MinDamage: 3
   MaxDamage: 6

@@ -12,7 +12,8 @@ namespace Utils.Managers
     public enum GameState
     {
         WorldMap,
-        Island
+        Island,
+        Testing
     }
     
     public class GameManager : Manager<GameManager>
@@ -29,6 +30,13 @@ namespace Utils.Managers
         
         private void Start()
         {
+            if (SceneManager.GetActiveScene().name == "TestingScene")
+            {
+                CurrentGameState = GameState.Testing;
+                SpawnManager.Instance.OnIslandVisit(IslandDifficulty.Easy);
+                UIManager.Instance.OnIslandVisit(new IslandChunk(Vector3Int.back, "Testing Island"));
+                
+            }
             SetupSystemPrefabs();
         }
 
@@ -122,7 +130,10 @@ namespace Utils.Managers
         public void InitializePlayer()
         {
             player = FindObjectOfType<Player>();
-
+            if (player ==  null)
+            {
+                throw new NullReferenceException();
+            }
             SetupEventListeners();
             SetupUI();
         }

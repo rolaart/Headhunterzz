@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1713149561747159275}
   - component: {fileID: 1713149561747159264}
   - component: {fileID: 1713149561747159268}
+  - component: {fileID: 1705346194}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -167,9 +168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaecff2af444cc48d703dd380d1cc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsTemplate: {fileID: 11400000, guid: f82d7941da5136d42bf5f87a2dddbc91, type: 2}
   stats: {fileID: 11400000, guid: f82d7941da5136d42bf5f87a2dddbc91, type: 2}
   lastDirection: 0
   onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onMobKilled:
     m_PersistentCalls:
       m_Calls: []
   state: 0
@@ -178,6 +183,7 @@ MonoBehaviour:
   wanderRadius: 2
   target: {fileID: 0}
   attack: {fileID: 11400000, guid: d7b80b25035836d4b8ef979919d2cabc, type: 2}
+  mobId: -1
 --- !u!114 &1713149561747159268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +212,21 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &1705346194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713149561747159267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2abe2a5d8d274875870be10f6b258a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDefinitions:
+  - {fileID: 11400000, guid: 3578be47fd5fb2640af8860f1de1f281, type: 2}
+  - {fileID: 11400000, guid: b62538f35c8f83941899385a5968a3e3, type: 2}
 --- !u!1001 &1713149562885686419
 PrefabInstance:
   m_ObjectHideFlags: 0
