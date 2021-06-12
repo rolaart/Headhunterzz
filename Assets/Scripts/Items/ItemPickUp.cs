@@ -18,7 +18,7 @@ namespace Items
 
             if (itemDefinition.storable)
             {
-                GameManager.Instance.player.Inventory.Add(itemDefinition, stats);
+                GameManager.Instance.player.inventory.Add(itemDefinition, stats);
             }
             else
             {

@@ -5,6 +5,8 @@ using Settings;
 using UnityEngine;
 using UnityEngine.Events;
 using Utils.Managers;
+using Inventory;
+using UnityEngine.Serialization;
 
 namespace Characters {
 
@@ -16,7 +18,7 @@ namespace Characters {
 		private readonly Ability[] _abilities = new Ability[1];
 		private float timeOfLastAttack = float.MinValue;
 
-		public readonly Inventory.Inventory Inventory = new Inventory.Inventory();
+		public Inventory.Inventory inventory;
 		
 		protected override void Awake() {
 			base.Awake();

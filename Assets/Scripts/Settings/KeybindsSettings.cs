@@ -5,6 +5,7 @@ namespace Settings {
 	public class KeybindsSettings : ScriptableObject {
 		public KeyCode dashKey;
 		public KeyCode attackKey;
+		public KeyCode inventoryKey;
 	}
 
 }

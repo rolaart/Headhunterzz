@@ -1,34 +1,51 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Characters;
 using Items;
+using Settings;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using Utils.Managers;
 
 namespace Inventory
 {
-    public class Inventory
+    public class Inventory : MonoBehaviour
     {
+        [SerializeField] private KeybindsSettings keybindsSettings;
+        public bool isDirty = true;
         private const int RowSize = 6;
+        private const int ColSize = 4;
 
-        private readonly ItemDefinition[][] items = new ItemDefinition[RowSize][];
-
+        public readonly ItemDefinition[][] Items = new ItemDefinition[RowSize][];
         private int nextFreeRow = 0;
         private int nextFreeColumn = 0;
 
-        public Inventory()
+        private void Start()
         {
             for (int i = 0; i < RowSize; i++)
             {
-                items[i] = new ItemDefinition[RowSize];
+                Items[i] = new ItemDefinition[ColSize];
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(keybindsSettings.inventoryKey))
+            {
+                UIManager.Instance.OnInventoryButton(this);
             }
         }
 
         public bool CanAdd()
         {
-            return nextFreeRow < RowSize || nextFreeColumn < RowSize;
+            return nextFreeRow < RowSize || nextFreeColumn < ColSize;
         }
 
         public void Add(ItemDefinition item, CharacterStats stats)
         {
+            isDirty = true;
             if (item.stackable)
             {
                 AddStackable(item);
@@ -50,9 +67,9 @@ namespace Inventory
 
         private void PlaceInInventory(ItemDefinition item)
         {
-            items[nextFreeRow][nextFreeColumn] = item;
+            Items[nextFreeRow][nextFreeColumn] = item;
             nextFreeColumn++;
-            if (nextFreeColumn == RowSize)
+            if (nextFreeColumn == ColSize)
             {
                 nextFreeColumn = 0;
                 nextFreeRow++;
@@ -67,19 +84,19 @@ namespace Inventory
             {
                 for (int j = 0; j < RowSize; j++)
                 {
-                    if (items[i][j].type == item.type)
+                    if (Items[i][j].type == item.type)
                     {
                         // maybe it is already full stack
-                        bool isFullStack = items[i][j].amount == item.maxCountPerStack;
+                        bool isFullStack = Items[i][j].amount == item.maxCountPerStack;
                         if (!isFullStack)
                         {
-                            items[i][j].amount += item.amount;
-                            int leftover = items[i][j].amount % item.maxCountPerStack;
+                            Items[i][j].amount += item.amount;
+                            int leftover = Items[i][j].amount % item.maxCountPerStack;
 
-                            bool hasLeftover = leftover != items[i][j].amount;
+                            bool hasLeftover = leftover != Items[i][j].amount;
                             if (hasLeftover)
                             {
-                                items[i][j].amount = item.maxCountPerStack;
+                                Items[i][j].amount = item.maxCountPerStack;
                                 item.amount = leftover;
                                 PlaceInInventory(item);
                                 return;
@@ -108,9 +125,9 @@ namespace Inventory
          */
         public void SwapItems(int x1, int y1, int x2, int y2)
         {
-            var tmp = items[x1][y1];
-            items[x1][y1] = items[x2][y2];
-            items[x2][y2] = tmp;
+            var tmp = Items[x1][y1];
+            Items[x1][y1] = Items[x2][y2];
+            Items[x2][y2] = tmp;
         }
     }
 }

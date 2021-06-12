@@ -15,10 +15,9 @@ MonoBehaviour:
   name: Gold
   type: 1
   subType: 0
-  amount: 0
+  amount: 20
   spawnChance: 100
-  material: {fileID: 0}
-  icon: {fileID: 21300000, guid: aa77b6e5f30dc4f59b556738c9f3b348, type: 3}
+  icon: {fileID: 0}
   spawnObject: {fileID: 5592354613507689491, guid: bd57529b35ece7540acba63fb818df78, type: 3}
   storable: 0
   stackable: 0

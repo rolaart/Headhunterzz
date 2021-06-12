@@ -1,9 +1,11 @@
 ﻿using System;
 using Characters;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 using World;
 
 namespace Utils.Managers
@@ -25,6 +27,18 @@ namespace Utils.Managers
         [SerializeField] public TextMeshProUGUI playerLevel;
         [SerializeField] public Image playerExperienceBar;
     }
+    
+    [Serializable]
+    public struct InventoryGUI
+    {
+        [SerializeField] public GameObject inventoryPanel;
+        [SerializeField] public Image[] equippedSlots;
+        [SerializeField] public Image[] inventorySlots;
+        [SerializeField] public Image selectedSlot;
+        [SerializeField] public TextMeshProUGUI gold;
+        [SerializeField] public TextMeshProUGUI[] characterStats;
+    }
+    
 
     [Serializable]
     public struct IslandDisplayGUI
@@ -39,7 +53,7 @@ namespace Utils.Managers
         [SerializeField] private MapGUI mapGui;
         [SerializeField] private PlayerFrameGUI playerFrameGui;
         [SerializeField] private IslandDisplayGUI islandDisplayGui;
-
+        [SerializeField] private InventoryGUI inventoryGUI;
 
         private void Start()
         {
@@ -103,7 +117,46 @@ namespace Utils.Managers
             playerFrameGui.playerFrame.SetActive(false);
         }
 
-        
+        public void OnInventoryButton(Inventory.Inventory inventory)
+        {
+            if (inventoryGUI.inventoryPanel.gameObject.activeInHierarchy)
+            {
+                inventoryGUI.inventoryPanel.SetActive(false);
+                return;
+            }
+            
+            if (inventory.isDirty)
+            {
+                inventory.isDirty = false;
+                
+                int rows = inventory.Items.Length;
+                int cols = inventory.Items[0].Length;
+                // update the inventory
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        if (inventory.Items[i][j] != null)
+                        {
+                            Sprite icon = inventory.Items[i][j].icon;
+                            inventoryGUI.inventorySlots[i * rows + cols].sprite = icon;
+                        }
+                    }
+                }
+                // update the character stats
+                var stats = GameManager.Instance.player.stats;
+                inventoryGUI.characterStats[0].text = stats.Strength.ToString();
+                inventoryGUI.characterStats[1].text = stats.Stamina.ToString();
+                inventoryGUI.characterStats[2].text = stats.Luck.ToString();
+                inventoryGUI.characterStats[3].text = stats.Charisma.ToString();
+                inventoryGUI.characterStats[4].text = stats.Damage.ToString();
+                inventoryGUI.characterStats[5].text = stats.MaxHealth.ToString();
+                inventoryGUI.characterStats[6].text = stats.CriticalChance.ToString("F") + "%";
+                inventoryGUI.characterStats[7].text = stats.AdditionalGold.ToString("F") + "%";
+            }
+            
+            inventoryGUI.inventoryPanel.SetActive(true);
+        }
 
         #endregion
 
