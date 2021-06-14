@@ -2,6 +2,7 @@
 using Items;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils.Attributes;
 
 namespace Characters
 {
@@ -40,7 +41,8 @@ namespace Characters
 
         #region Equippable Items
 
-        public ItemDefinition Weapon;
+        [NamedArray(new []{"Helm", "Chest", "Legs", "Feet", "Weapon"})]
+        public ItemDefinition[] EquippedItems = new ItemDefinition[5];
 
         #endregion
         // TODO Play with the coefficients scaling 

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.WSA;
+using Utils.Attributes;
 using World;
 
 namespace Utils.Managers
@@ -27,18 +28,28 @@ namespace Utils.Managers
         [SerializeField] public TextMeshProUGUI playerLevel;
         [SerializeField] public Image playerExperienceBar;
     }
-    
+
     [Serializable]
     public struct InventoryGUI
     {
         [SerializeField] public GameObject inventoryPanel;
-        [SerializeField] public Image[] equippedSlots;
+
+        [NamedArray(new[] {"Helm", "Chest", "Legs", "Feet", "Weapon"})] [SerializeField]
+        public Image[] equippedSlots;
+
         [SerializeField] public Image[] inventorySlots;
         [SerializeField] public Image selectedSlot;
         [SerializeField] public TextMeshProUGUI gold;
-        [SerializeField] public TextMeshProUGUI[] characterStats;
+
+        [NamedArray(new[]
+        {
+            "Strength", "Stamina", "Luck", "Charisma",
+            "Damage", "Health", "Crit Chance", "Gold Chance"
+        })]
+        [SerializeField]
+        public TextMeshProUGUI[] characterStats;
     }
-    
+
 
     [Serializable]
     public struct IslandDisplayGUI
@@ -58,14 +69,14 @@ namespace Utils.Managers
         private void Start()
         {
             mapGui.visitIsland.onClick.AddListener(() => FindObjectOfType<Map>().TeleportToSelectedIsland());
-            
+
             islandDisplayGui.islandDisplay.onFadeInAndOutAnimationClip.AddListener(OnIslandDisplayFadeOut);
-            
+
             GameManager.Instance.onIslandVisit.AddListener(OnIslandVisit);
         }
 
         #region Listeners
-        
+
         public void OnIslandDisplayFadeOut()
         {
             islandDisplayGui.islandDisplayPanel.SetActive(false);
@@ -75,15 +86,14 @@ namespace Utils.Managers
         {
             HideMapGui();
             ShowHUD();
-            
+
             islandDisplayGui.islandDisplayPanel.SetActive(true);
             islandDisplayGui.islandName.text = islandChunk.Name;
             islandDisplayGui.islandDisplay.FadeIn();
-
         }
-        
+
         #endregion
-        
+
         #region Island
 
         public void UpdatePlayerHealth(Player player)
@@ -124,11 +134,11 @@ namespace Utils.Managers
                 inventoryGUI.inventoryPanel.SetActive(false);
                 return;
             }
-            
-            if (inventory.isDirty)
+
+            if (true)
             {
                 inventory.isDirty = false;
-                
+
                 int rows = inventory.Items.Length;
                 int cols = inventory.Items[0].Length;
                 // update the inventory
@@ -136,15 +146,44 @@ namespace Utils.Managers
                 {
                     for (int j = 0; j < cols; j++)
                     {
-                        if (inventory.Items[i][j] != null)
+                        bool hasItem = inventory.Items[i][j] != null;
+                        int idx = i * cols + j;
+                        if (hasItem)
                         {
                             Sprite icon = inventory.Items[i][j].icon;
-                            inventoryGUI.inventorySlots[i * rows + cols].sprite = icon;
+                            inventoryGUI.inventorySlots[idx].sprite = icon;
+                            inventoryGUI.inventorySlots[idx].gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                inventoryGUI.inventorySlots[idx].gameObject.SetActive(false);
+                            } catch(Exception e)
+                            {
+                                Debug.Log(idx);
+                            }
+                           
                         }
                     }
                 }
-                // update the character stats
+
+                // update the character equipped items and stats
                 var stats = GameManager.Instance.player.stats;
+                for (int i = 0; i < stats.EquippedItems.Length; i++)
+                {
+                    bool hasItem = stats.EquippedItems[i] != null;
+                    if (hasItem)
+                    {
+                        inventoryGUI.equippedSlots[i].sprite = stats.EquippedItems[i].icon;
+                        inventoryGUI.equippedSlots[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        inventoryGUI.equippedSlots[i].gameObject.SetActive(false);
+                    }
+                }
+
                 inventoryGUI.characterStats[0].text = stats.Strength.ToString();
                 inventoryGUI.characterStats[1].text = stats.Stamina.ToString();
                 inventoryGUI.characterStats[2].text = stats.Luck.ToString();
@@ -154,7 +193,7 @@ namespace Utils.Managers
                 inventoryGUI.characterStats[6].text = stats.CriticalChance.ToString("F") + "%";
                 inventoryGUI.characterStats[7].text = stats.AdditionalGold.ToString("F") + "%";
             }
-            
+
             inventoryGUI.inventoryPanel.SetActive(true);
         }
 

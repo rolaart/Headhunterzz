@@ -18,7 +18,7 @@ namespace Items
 
             if (itemDefinition.storable)
             {
-                GameManager.Instance.player.inventory.Add(itemDefinition, stats);
+                GameManager.Instance.player.inventory.Add(this, stats);
             }
             else
             {
@@ -38,6 +38,7 @@ namespace Items
                     stats.RegainHealth(itemDefinition.amount);
                     break;
                 case ItemType.Gold:
+                    GameManager.Instance.player.inventory.isDirty = true;
                     stats.GiveGold(itemDefinition.amount);
                     break;
                 default:

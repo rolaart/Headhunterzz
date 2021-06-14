@@ -43,8 +43,9 @@ namespace Inventory
             return nextFreeRow < RowSize || nextFreeColumn < ColSize;
         }
 
-        public void Add(ItemDefinition item, CharacterStats stats)
+        public void Add(ItemPickUp itemPickUp, CharacterStats stats)
         {
+            ItemDefinition item = itemPickUp.itemDefinition;
             isDirty = true;
             if (item.stackable)
             {
@@ -53,16 +54,15 @@ namespace Inventory
             }
 
             // Maybe we can equip it in a weapon or armor slot
-            switch (item.type)
+            bool isEquipped = TryEquip(ref stats.EquippedItems[(int) item.type + (int) item.subType], item);
+            if (isEquipped)
             {
-                case ItemType.Weapon:
-                    if (TryEquip(ref stats.Weapon, item)) return;
-                    break;
-                case ItemType.Armor:
-                    throw new NotImplementedException();
+                Destroy(itemPickUp.gameObject);
+                return;
             }
 
             PlaceInInventory(item);
+            Destroy(itemPickUp.gameObject);
         }
 
         private void PlaceInInventory(ItemDefinition item)
@@ -112,7 +112,7 @@ namespace Inventory
 
         private static bool TryEquip(ref ItemDefinition current, ItemDefinition toEquip)
         {
-            if (current) return false;
+            if (current != null) return false;
 
             current = toEquip;
             return true;

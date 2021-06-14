@@ -22,11 +22,10 @@ namespace Utils.Managers
         private List<GameObject> instancedSystemPrefabs = new List<GameObject>();
 
         public GameState CurrentGameState { get; set; } = GameState.WorldMap;
-        public UnityEvent<GameState, GameState> onGameStateChanged;
-        public UnityEvent<IslandChunk> onIslandVisit;
+        [HideInInspector] public UnityEvent<GameState, GameState> onGameStateChanged;
+        [HideInInspector] public UnityEvent<IslandChunk> onIslandVisit;
 
         [HideInInspector] public Player player;
-        
         
         private void Start()
         {

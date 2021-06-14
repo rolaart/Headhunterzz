@@ -6,19 +6,19 @@ namespace Items
 {
     public enum ItemType
     {
+        Armor = 0,
         Health,
         Gold,
-        Weapon,
-        Armor
+        Weapon = 4,
     }
 
     public enum ItemSubType
     {
-        None,
-        Helm,
-        Chest,
-        Legs,
-        Feet
+        None = 0,
+        Helm = 0,
+        Chest = 1,
+        Legs = 2,
+        Feet = 3
     }
     
     [CreateAssetMenu(fileName = "NewItem", menuName = "Pickable Item", order = 1)]

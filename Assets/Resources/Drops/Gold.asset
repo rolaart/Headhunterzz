@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   name: Gold
-  type: 1
+  type: 2
   subType: 0
   amount: 20
   spawnChance: 100
